@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Шпаргалка по CSS для начинающих frontend-разработчиков: синтаксис, селекторы, box model, display, единицы измерения, специфичность и полезные свойства."
+      content="Шпаргалка по CSS для начинающих frontend-разработчиков: подключение CSS, синтаксис, селекторы, box model, display, flex, overflow, единицы измерения, специфичность и полезные свойства."
     />
-    <title>Шпаргалка по CSS для начинающих</title>
+    <title>Developer CSS</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content"
-      >Перейти к основному содержимому</a
-    >
+    <a class="skip-link" href="#main-content">
+      Перейти к основному содержимому
+    </a>
 
     <header class="site-header">
       <div class="container site-header__inner">
@@ -39,8 +39,8 @@
           <div>
             <h1 class="title" id="page-title">Шпаргалка по CSS</h1>
             <p class="subtitle">
-              Синтаксис, селекторы, box model, display, размеры, цвета и базовые
-              правила оформления элементов.
+              Подключение CSS, синтаксис, селекторы, box model, display, flex,
+              размеры, цвета и базовые правила оформления элементов.
             </p>
           </div>
         </section>
@@ -52,22 +52,82 @@
         <nav class="card card--solid toc" aria-labelledby="toc-title">
           <h2 class="section-title" id="toc-title">Содержание</h2>
           <ol>
+            <li><a href="#connect-css">Как подключить CSS</a></li>
             <li><a href="#css-syntax">Синтаксис CSS</a></li>
             <li><a href="#selectors">CSS-селекторы</a></li>
             <li><a href="#common-properties">Основные CSS-свойства</a></li>
             <li><a href="#box-model">Box Model</a></li>
+            <li><a href="#margin-padding">Margin и Padding</a></li>
             <li><a href="#display">Display</a></li>
+            <li><a href="#flex-basics">Flexbox</a></li>
+            <li><a href="#overflow-zindex">Overflow и z-index</a></li>
             <li><a href="#units">Единицы измерения</a></li>
             <li><a href="#specificity">Специфичность</a></li>
             <li><a href="#cascade">Каскад и порядок правил</a></li>
             <li><a href="#positioning">Position</a></li>
             <li><a href="#colors-backgrounds">Цвета и фоны</a></li>
             <li><a href="#pseudo-classes">Псевдоклассы и псевдоэлементы</a></li>
+            <li><a href="#mini-example">Мини-пример блока</a></li>
             <li><a href="#mistakes">Частые ошибки новичков</a></li>
             <li><a href="#remember">Что важно запомнить</a></li>
           </ol>
         </nav>
+
         <div class="docs-content">
+          <section
+            class="card card--solid content-flow"
+            id="connect-css"
+            aria-labelledby="connect-css-title"
+          >
+            <h2 class="section-title" id="connect-css-title">
+              Как подключить CSS
+            </h2>
+
+            <p>
+              CSS можно подключить тремя основными способами: через отдельный
+              файл, внутри тега <code>&lt;style&gt;</code> или прямо в атрибуте
+              <code>style</code>.
+            </p>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Способы подключения CSS
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Способ</th>
+                    <th scope="col">Пример</th>
+                    <th scope="col">Когда использовать</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Внешний файл</td>
+                    <td><code>&lt;link rel="stylesheet" href="style.css" /&gt;</code></td>
+                    <td>Основной и самый удобный способ</td>
+                  </tr>
+                  <tr>
+                    <td>Внутри страницы</td>
+                    <td><code>&lt;style&gt; p { color: red; } &lt;/style&gt;</code></td>
+                    <td>Для маленьких демо или тестов</td>
+                  </tr>
+                  <tr>
+                    <td>Inline-стиль</td>
+                    <td><code>&lt;p style="color: red;"&gt;...&lt;/p&gt;</code></td>
+                    <td>Редко, точечно, не для основной стилизации</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre class="code"><code>&lt;link rel="stylesheet" href="style.css" /&gt;</code></pre>
+
+            <p class="note">
+              В реальных проектах чаще всего используют внешний CSS-файл.
+            </p>
+          </section>
+
           <section
             class="card card--solid content-flow"
             id="css-syntax"
@@ -140,12 +200,8 @@
 button:hover { }</code></pre>
 
             <ul>
-              <li>
-                <strong><code>p</code></strong> — селектор по тегу
-              </li>
-              <li>
-                <strong><code>.card</code></strong> — селектор по классу
-              </li>
+              <li><strong><code>p</code></strong> — селектор по тегу</li>
+              <li><strong><code>.card</code></strong> — селектор по классу</li>
               <li>
                 <strong><code>#header</code></strong> — селектор по
                 <code>id</code>
@@ -271,6 +327,14 @@ button:hover { }</code></pre>
                     <td><code>display</code></td>
                     <td>Определяет способ отображения элемента</td>
                   </tr>
+                  <tr>
+                    <td><code>max-width</code></td>
+                    <td>Ограничивает максимальную ширину</td>
+                  </tr>
+                  <tr>
+                    <td><code>overflow</code></td>
+                    <td>Управляет тем, что выходит за границы блока</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -304,10 +368,63 @@ button:hover { }</code></pre>
               <li><strong>margin</strong> — внешний отступ</li>
             </ul>
 
+            <pre class="code"><code>* {
+  box-sizing: border-box;
+}</code></pre>
+
+            <p>
+              Свойство <code>box-sizing: border-box</code> делает расчёт размеров
+              удобнее: <code>padding</code> и <code>border</code> входят внутрь
+              указанной ширины и высоты элемента.
+            </p>
+
             <p class="note">
-              Очень полезное правило почти для любого проекта:
-              <code>* { box-sizing: border-box; }</code>. Тогда ширина и высота
-              считаются удобнее.
+              Без <code>border-box</code> внутренние отступы увеличивают итоговый
+              размер блока. С ним размеры становятся более предсказуемыми.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="margin-padding"
+            aria-labelledby="margin-padding-title"
+          >
+            <h2 class="section-title" id="margin-padding-title">
+              Margin и Padding
+            </h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Разница между margin и padding
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>margin</code></td>
+                    <td>Создаёт пространство снаружи элемента</td>
+                  </tr>
+                  <tr>
+                    <td><code>padding</code></td>
+                    <td>Создаёт пространство внутри элемента</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre class="code"><code>.box {
+  margin: 20px;
+  padding: 20px;
+}</code></pre>
+
+            <p class="note">
+              Простое правило: <code>margin</code> — снаружи,
+              <code>padding</code> — внутри.
             </p>
           </section>
 
@@ -366,6 +483,115 @@ button:hover { }</code></pre>
   display: flex;
   gap: 12px;
 }</code></pre>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="flex-basics"
+            aria-labelledby="flex-basics-title"
+          >
+            <h2 class="section-title" id="flex-basics-title">Flexbox</h2>
+
+            <p>
+              Flexbox часто используют для выравнивания элементов в строку или
+              колонку, а также для распределения пространства между ними.
+            </p>
+
+            <pre class="code"><code>.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}</code></pre>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Базовые свойства Flexbox
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>justify-content</code></td>
+                    <td>Выравнивает элементы по главной оси</td>
+                  </tr>
+                  <tr>
+                    <td><code>align-items</code></td>
+                    <td>Выравнивает элементы по поперечной оси</td>
+                  </tr>
+                  <tr>
+                    <td><code>gap</code></td>
+                    <td>Задаёт расстояние между элементами</td>
+                  </tr>
+                  <tr>
+                    <td><code>flex-direction</code></td>
+                    <td>Меняет направление: строка или колонка</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              Для простого горизонтального или вертикального выравнивания
+              Flexbox — один из самых удобных инструментов.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="overflow-zindex"
+            aria-labelledby="overflow-zindex-title"
+          >
+            <h2 class="section-title" id="overflow-zindex-title">
+              Overflow и z-index
+            </h2>
+
+            <pre class="code"><code>.card {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  z-index: 100;
+}</code></pre>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Полезные свойства для слоёв и переполнения
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>overflow: hidden</code></td>
+                    <td>Скрывает то, что выходит за границы блока</td>
+                  </tr>
+                  <tr>
+                    <td><code>overflow: auto</code></td>
+                    <td>Добавляет прокрутку при необходимости</td>
+                  </tr>
+                  <tr>
+                    <td><code>z-index</code></td>
+                    <td>Определяет, какой элемент будет выше других</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              <code>z-index</code> обычно работает у элементов с
+              <code>position</code>, отличным от <code>static</code>.
+            </p>
           </section>
 
           <section
@@ -648,6 +874,48 @@ button:focus-visible {
 
           <section
             class="card card--solid content-flow"
+            id="mini-example"
+            aria-labelledby="mini-example-title"
+          >
+            <h2 class="section-title" id="mini-example-title">
+              Мини-пример блока
+            </h2>
+
+            <p>
+              Ниже пример простой карточки, где используются фон, отступы,
+              скругление, тень и ограничение ширины.
+            </p>
+
+            <pre class="code"><code>&lt;div class="card"&gt;
+  &lt;h3 class="card-title"&gt;Заголовок&lt;/h3&gt;
+  &lt;p class="card-text"&gt;Небольшой текст внутри блока.&lt;/p&gt;
+  &lt;a class="card-link" href="#"&gt;Подробнее&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+            <pre class="code"><code>.card {
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  margin-bottom: 12px;
+}
+
+.card-text {
+  margin-bottom: 16px;
+}</code></pre>
+
+            <p class="note">
+              Такие короткие готовые примеры помогают быстрее понять, как
+              свойства работают вместе.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
             id="mistakes"
             aria-labelledby="mistakes-title"
           >
@@ -725,9 +993,13 @@ button:focus-visible {
             <h2 class="section-title" id="remember-title">
               Что важно запомнить
             </h2>
+
             <ul>
               <li>CSS отвечает за внешний вид элементов</li>
               <li>Стиль строится из селектора, свойства и значения</li>
+              <li>
+                Внешний CSS-файл — основной и самый удобный способ подключения
+              </li>
               <li>
                 Классы обычно удобнее, чем длинные селекторы и <code>id</code>
               </li>
@@ -737,6 +1009,10 @@ button:focus-visible {
               <li>
                 <code>display</code>, <code>position</code> и box model сильно
                 влияют на layout
+              </li>
+              <li>
+                <code>box-sizing: border-box</code> делает размеры элементов
+                удобнее
               </li>
               <li>Важны каскад, специфичность и порядок правил</li>
               <li>
@@ -751,40 +1027,37 @@ button:focus-visible {
     <footer class="site-footer">
       <div class="container site-footer__inner">
         <div class="footer-grid">
-    
           <div class="footer-col">
             <p class="footer-title">Developer Notes</p>
-    
+
             <p class="footer-text">
               Личная база заметок по программированию и разработке.
               Короткие объяснения, синтаксис и примеры кода.
             </p>
           </div>
-    
+
           <div class="footer-col">
             <p class="footer-title">Проект</p>
-    
+
             <p class="footer-text">
               Проект постепенно дополняется новыми заметками
               по различным технологиям и инструментам разработки.
             </p>
           </div>
-    
+
           <div class="footer-col">
             <p class="footer-title">Информация</p>
-    
+
             <p class="footer-text">
               Компактная документация для быстрого повторения
               синтаксиса, концепций и практических примеров.
             </p>
           </div>
-    
         </div>
-    
+
         <div class="footer-bottom">
           <p>© 2026 Developer Notes • Personal developer handbook</p>
         </div>
-    
       </div>
     </footer>
 
