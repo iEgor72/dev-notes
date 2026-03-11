@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Шпаргалка по JavaScript: синтаксис, переменные, типы данных, функции, массивы, объекты, DOM, события, fetch, async/await и полезные методы."
+    />
+    <title>JavaScript Developer Notes</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content"
+      >Перейти к основному содержимому</a
+    >
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <nav class="nav" aria-label="Основная навигация">
+          <a class="nav__brand" href="../index.html">Developer Notes</a>
+
+          <ul class="nav__links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="html.html">HTML</a></li>
+            <li><a href="css.html">CSS</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="git.html">Git</a></li>
+            <li>
+              <a href="js.html" class="active" aria-current="page"
+                >JavaScript</a
+              >
+            </li>
+            <li><a href="ts.html">TypeScript</a></li>
+          </ul>
+        </nav>
+
+        <section class="hero card" aria-labelledby="page-title">
+          <span class="badge">JavaScript</span>
+          <div>
+            <h1 class="title" id="page-title">Шпаргалка по JavaScript</h1>
+            <p class="subtitle">
+              Базовый синтаксис, логика, работа с данными, DOM, события, запросы
+              и современные возможности языка.
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="container page-stack" id="main-content">
+      <div class="docs-layout">
+        <nav class="card card--solid toc" aria-labelledby="toc-title">
+          <h2 class="section-title" id="toc-title">Содержание</h2>
+          <ol>
+            <li><a href="#what-is-js">Что такое JavaScript</a></li>
+            <li><a href="#connect-js">Подключение JavaScript</a></li>
+            <li><a href="#variables">Переменные</a></li>
+            <li><a href="#data-types">Типы данных</a></li>
+            <li><a href="#operators">Операторы</a></li>
+            <li><a href="#conditions">Условия</a></li>
+            <li><a href="#loops">Циклы</a></li>
+            <li><a href="#functions">Функции</a></li>
+            <li><a href="#arrays">Массивы</a></li>
+            <li><a href="#objects">Объекты</a></li>
+            <li><a href="#dom">Работа с DOM</a></li>
+            <li><a href="#events">События</a></li>
+            <li><a href="#async">Async / Await и Fetch</a></li>
+            <li><a href="#useful-methods">Полезные методы</a></li>
+            <li><a href="#mistakes">Частые ошибки новичков</a></li>
+            <li><a href="#remember">Что важно запомнить</a></li>
+          </ol>
+        </nav>
+        <div class="docs-content">
+          <section
+            class="card card--solid content-flow"
+            id="what-is-js"
+            aria-labelledby="what-is-js-title"
+          >
+            <h2 class="section-title" id="what-is-js-title">
+              Что такое JavaScript
+            </h2>
+            <p>
+              <strong>JavaScript</strong> — это язык программирования, который
+              добавляет страницам поведение, логику и интерактивность.
+            </p>
+            <p>
+              С его помощью можно реагировать на действия пользователя, менять
+              содержимое страницы, работать с данными, отправлять запросы на
+              сервер и строить полноценные приложения.
+            </p>
+            <p class="note">
+              HTML отвечает за структуру, CSS — за внешний вид, JavaScript — за
+              поведение.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="connect-js"
+            aria-labelledby="connect-js-title"
+          >
+            <h2 class="section-title" id="connect-js-title">
+              Подключение JavaScript
+            </h2>
+            <pre
+              class="code"
+            ><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+            <p>
+              Внешний файл JavaScript обычно подключают перед закрывающим тегом
+              <code>&lt;/body&gt;</code>, чтобы HTML успел загрузиться до
+              выполнения скрипта.
+            </p>
+            <pre
+              class="code"
+            ><code>&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
+            <p class="note">
+              Атрибут <code>defer</code> часто удобнее: скрипт загружается
+              параллельно, а выполняется после разбора HTML.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="variables"
+            aria-labelledby="variables-title"
+          >
+            <h2 class="section-title" id="variables-title">Переменные</h2>
+            <pre class="code"><code>let name = "Alex";
+const age = 25;
+var oldWay = "устаревший вариант";</code></pre>
+            <ul>
+              <li>
+                <strong><code>let</code></strong> — переменная, значение можно
+                менять
+              </li>
+              <li>
+                <strong><code>const</code></strong> — константа, её нельзя
+                переназначить
+              </li>
+              <li>
+                <strong><code>var</code></strong> — старый способ объявления
+                переменных
+              </li>
+            </ul>
+            <p class="note">
+              В современном коде обычно используют <code>const</code> по
+              умолчанию и <code>let</code>, если значение должно меняться.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="data-types"
+            aria-labelledby="data-types-title"
+          >
+            <h2 class="section-title" id="data-types-title">Типы данных</h2>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Основные типы данных в JavaScript
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Пример</th>
+                    <th scope="col">Что это</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>String</code></td>
+                    <td><code>"Hello"</code></td>
+                    <td>Строка</td>
+                  </tr>
+                  <tr>
+                    <td><code>Number</code></td>
+                    <td><code>42</code></td>
+                    <td>Число</td>
+                  </tr>
+                  <tr>
+                    <td><code>Boolean</code></td>
+                    <td><code>true</code> / <code>false</code></td>
+                    <td>Логическое значение</td>
+                  </tr>
+                  <tr>
+                    <td><code>Null</code></td>
+                    <td><code>null</code></td>
+                    <td>Пустое значение</td>
+                  </tr>
+                  <tr>
+                    <td><code>Undefined</code></td>
+                    <td><code>undefined</code></td>
+                    <td>Значение не задано</td>
+                  </tr>
+                  <tr>
+                    <td><code>Array</code></td>
+                    <td><code>[1, 2, 3]</code></td>
+                    <td>Массив</td>
+                  </tr>
+                  <tr>
+                    <td><code>Object</code></td>
+                    <td><code>{ name: "Alex" }</code></td>
+                    <td>Объект</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="operators"
+            aria-labelledby="operators-title"
+          >
+            <h2 class="section-title" id="operators-title">Операторы</h2>
+            <pre class="code"><code>const a = 10;
+const b = 5;
+
+console.log(a + b);
+console.log(a > b);
+console.log(a === 10);
+console.log(a !== b);</code></pre>
+            <p>Часто используются такие группы операторов:</p>
+            <ul>
+              <li>
+                арифметические: <code>+</code>, <code>-</code>, <code>*</code>,
+                <code>/</code>
+              </li>
+              <li>
+                сравнения: <code>&gt;</code>, <code>&lt;</code>,
+                <code>&gt;=</code>, <code>===</code>, <code>!==</code>
+              </li>
+              <li>
+                логические: <code>&&</code>, <code>||</code>, <code>!</code>
+              </li>
+            </ul>
+            <p class="note">
+              Обычно лучше использовать строгое сравнение <code>===</code>, а не
+              <code>==</code>.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="conditions"
+            aria-labelledby="conditions-title"
+          >
+            <h2 class="section-title" id="conditions-title">Условия</h2>
+            <pre class="code"><code>if (age >= 18) {
+  console.log("adult");
+} else {
+  console.log("minor");
+}</code></pre>
+            <pre
+              class="code"
+            ><code>const message = age >= 18 ? "adult" : "minor";</code></pre>
+            <p>
+              Условия помогают выполнять разный код в зависимости от значения.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="loops"
+            aria-labelledby="loops-title"
+          >
+            <h2 class="section-title" id="loops-title">Циклы</h2>
+            <pre class="code"><code>for (let i = 0; i < 5; i++) {
+  console.log(i);
+}</code></pre>
+            <pre class="code"><code>for (const item of ["HTML", "CSS", "JS"]) {
+  console.log(item);
+}</code></pre>
+            <p>
+              Циклы нужны, когда один и тот же код надо повторить несколько раз.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="functions"
+            aria-labelledby="functions-title"
+          >
+            <h2 class="section-title" id="functions-title">Функции</h2>
+            <pre class="code"><code>function greet(name) {
+  return "Hello " + name;
+}
+
+const sum = (a, b) => a + b;</code></pre>
+            <p>
+              Функции позволяют переиспользовать код, разбивать программу на
+              части и делать логику понятнее.
+            </p>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Популярные виды функций
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Вид</th>
+                    <th scope="col">Пример</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Обычная функция</td>
+                    <td><code>function sayHi() {}</code></td>
+                  </tr>
+                  <tr>
+                    <td>Функциональное выражение</td>
+                    <td><code>const sayHi = function() {}</code></td>
+                  </tr>
+                  <tr>
+                    <td>Стрелочная функция</td>
+                    <td><code>const sayHi = () => {}</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="arrays"
+            aria-labelledby="arrays-title"
+          >
+            <h2 class="section-title" id="arrays-title">Массивы</h2>
+            <pre
+              class="code"
+            ><code>const fruits = ["apple", "banana", "orange"];
+
+console.log(fruits[0]);
+fruits.push("grape");</code></pre>
+            <p>
+              Массив — это список значений, к которым можно обращаться по
+              индексу.
+            </p>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Полезные методы массива
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Метод</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>push()</code></td>
+                    <td>Добавляет элемент в конец</td>
+                  </tr>
+                  <tr>
+                    <td><code>pop()</code></td>
+                    <td>Удаляет последний элемент</td>
+                  </tr>
+                  <tr>
+                    <td><code>map()</code></td>
+                    <td>Создаёт новый массив, преобразуя каждый элемент</td>
+                  </tr>
+                  <tr>
+                    <td><code>filter()</code></td>
+                    <td>Оставляет только подходящие элементы</td>
+                  </tr>
+                  <tr>
+                    <td><code>find()</code></td>
+                    <td>Ищет первый подходящий элемент</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="objects"
+            aria-labelledby="objects-title"
+          >
+            <h2 class="section-title" id="objects-title">Объекты</h2>
+            <pre class="code"><code>const user = {
+  name: "Alex",
+  age: 25,
+  isAdmin: false
+};
+
+console.log(user.name);</code></pre>
+            <p>
+              Объект хранит данные в формате <strong>ключ: значение</strong>.
+            </p>
+            <pre class="code"><code>const { name, age } = user;</code></pre>
+            <p class="note">
+              Такая запись называется деструктуризацией. Она часто используется
+              в современном JavaScript.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="dom"
+            aria-labelledby="dom-title"
+          >
+            <h2 class="section-title" id="dom-title">Работа с DOM</h2>
+            <pre class="code"><code>const title = document.querySelector("h1");
+
+title.textContent = "Hello JS";</code></pre>
+            <ul>
+              <li>
+                <code>querySelector()</code> — находит первый подходящий элемент
+              </li>
+              <li>
+                <code>querySelectorAll()</code> — находит несколько элементов
+              </li>
+              <li><code>textContent</code> — меняет текст</li>
+              <li><code>classList.add()</code> — добавляет класс</li>
+              <li><code>classList.remove()</code> — удаляет класс</li>
+            </ul>
+            <pre class="code"><code>const box = document.querySelector(".box");
+box.classList.add("active");</code></pre>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="events"
+            aria-labelledby="events-title"
+          >
+            <h2 class="section-title" id="events-title">События</h2>
+            <pre
+              class="code"
+            ><code>const button = document.querySelector("button");
+
+button.addEventListener("click", () => {
+  console.log("clicked");
+});</code></pre>
+            <p>Частые события:</p>
+            <ul>
+              <li><code>click</code> — клик</li>
+              <li><code>input</code> — ввод в поле</li>
+              <li><code>submit</code> — отправка формы</li>
+              <li><code>change</code> — изменение значения</li>
+              <li><code>keydown</code> — нажатие клавиши</li>
+            </ul>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="async"
+            aria-labelledby="async-title"
+          >
+            <h2 class="section-title" id="async-title">
+              Async / Await и Fetch
+            </h2>
+            <pre class="code"><code>async function loadUsers() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await response.json();
+  console.log(data);
+}</code></pre>
+            <p>
+              <code>fetch()</code> делает запрос к серверу, а
+              <code>async/await</code>
+              помогает писать асинхронный код более понятным способом.
+            </p>
+            <p class="note">
+              В реальном коде важно добавлять обработку ошибок через
+              <code>try...catch</code>.
+            </p>
+            <pre class="code"><code>async function loadData() {
+  try {
+    const response = await fetch("/api/data");
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}</code></pre>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="useful-methods"
+            aria-labelledby="useful-methods-title"
+          >
+            <h2 class="section-title" id="useful-methods-title">
+              Полезные методы
+            </h2>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Часто используемые методы JavaScript
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Метод</th>
+                    <th scope="col">Пример</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>map()</code></td>
+                    <td><code>arr.map(x => x * 2)</code></td>
+                    <td>Преобразует массив</td>
+                  </tr>
+                  <tr>
+                    <td><code>filter()</code></td>
+                    <td><code>arr.filter(x => x > 10)</code></td>
+                    <td>Фильтрует элементы</td>
+                  </tr>
+                  <tr>
+                    <td><code>includes()</code></td>
+                    <td><code>arr.includes("JS")</code></td>
+                    <td>Проверяет наличие значения</td>
+                  </tr>
+                  <tr>
+                    <td><code>Object.keys()</code></td>
+                    <td><code>Object.keys(user)</code></td>
+                    <td>Возвращает ключи объекта</td>
+                  </tr>
+                  <tr>
+                    <td><code>JSON.stringify()</code></td>
+                    <td><code>JSON.stringify(data)</code></td>
+                    <td>Преобразует объект в строку JSON</td>
+                  </tr>
+                  <tr>
+                    <td><code>JSON.parse()</code></td>
+                    <td><code>JSON.parse(text)</code></td>
+                    <td>Преобразует JSON-строку в объект</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="mistakes"
+            aria-labelledby="mistakes-title"
+          >
+            <h2 class="section-title" id="mistakes-title">
+              Частые ошибки новичков
+            </h2>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Типичные ошибки в JavaScript
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Ошибка</th>
+                    <th scope="col">Почему плохо</th>
+                    <th scope="col">Как лучше</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Использовать <code>var</code> без необходимости</td>
+                    <td>Поведение менее предсказуемо</td>
+                    <td>
+                      Обычно использовать <code>const</code> и <code>let</code>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Путать <code>==</code> и <code>===</code></td>
+                    <td>Можно получить неожиданные сравнения</td>
+                    <td>Предпочитать <code>===</code></td>
+                  </tr>
+                  <tr>
+                    <td>Менять DOM слишком хаотично</td>
+                    <td>Код быстро становится запутанным</td>
+                    <td>Делать понятные шаги и разбивать код на функции</td>
+                  </tr>
+                  <tr>
+                    <td>Игнорировать ошибки в запросах</td>
+                    <td>Трудно понять, почему код сломался</td>
+                    <td>Использовать <code>try...catch</code></td>
+                  </tr>
+                  <tr>
+                    <td>Писать всё в одном большом файле</td>
+                    <td>Код сложно читать и поддерживать</td>
+                    <td>Разделять логику на небольшие понятные части</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="remember"
+            aria-labelledby="remember-title"
+          >
+            <h2 class="section-title" id="remember-title">
+              Что важно запомнить
+            </h2>
+            <ul>
+              <li>JavaScript отвечает за поведение и логику</li>
+              <li>
+                <code>const</code> и <code>let</code> используются чаще всего
+              </li>
+              <li>Функции помогают переиспользовать код</li>
+              <li>Массивы и объекты — основа работы с данными</li>
+              <li>DOM позволяет менять страницу через код</li>
+              <li>События помогают реагировать на действия пользователя</li>
+              <li>
+                <code>fetch</code> и <code>async/await</code> нужны для работы с
+                данными с сервера
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>JavaScript Cheat Sheet</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Наверх страницы">
+      <span class="back-to-top__progress"></span>
+      ↑
+    </button>
+
+    <script src="../js/ui.js"></script>
+  </body>
+</html>

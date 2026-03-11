@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Шпаргалка по TypeScript: типы, интерфейсы, функции, generics, классы и работа с типизацией."
+    />
+    <title>Developer Notes</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content"
+      >Перейти к основному содержимому</a
+    >
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <nav class="nav" aria-label="Основная навигация">
+          <a class="nav__brand" href="../index.html">Developer Notes</a>
+
+          <ul class="nav__links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="html.html">HTML</a></li>
+            <li><a href="css.html">CSS</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="git.html">Git</a></li>
+            <li><a href="js.html">JavaScript</a></li>
+            <li>
+              <a href="ts.html" class="active" aria-current="page"
+                >TypeScript</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <section class="hero card" aria-labelledby="page-title">
+          <span class="badge">TypeScript</span>
+          <div>
+            <h1 class="title" id="page-title">Шпаргалка по TypeScript</h1>
+            <p class="subtitle">
+              Типизация для JavaScript: основные типы, интерфейсы, функции,
+              generics и работа с безопасным кодом.
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="container page-stack" id="main-content">
+      <div class="docs-layout">
+        <nav class="card card--solid toc">
+          <h2 class="section-title">Содержание</h2>
+          <ol>
+            <li><a href="#what-is-ts">Что такое TypeScript</a></li>
+            <li><a href="#basic-types">Базовые типы</a></li>
+            <li><a href="#typing-variables">Типизация переменных</a></li>
+            <li><a href="#functions">Типизация функций</a></li>
+            <li><a href="#interfaces">Интерфейсы</a></li>
+            <li><a href="#types">Type aliases</a></li>
+            <li><a href="#arrays">Массивы</a></li>
+            <li><a href="#generics">Generics</a></li>
+            <li><a href="#classes">Классы</a></li>
+            <li><a href="#utility-types">Полезные utility типы</a></li>
+            <li><a href="#remember">Что важно запомнить</a></li>
+          </ol>
+        </nav>
+        <div class="docs-content">
+          <section class="card card--solid content-flow" id="what-is-ts">
+            <h2 class="section-title">Что такое TypeScript</h2>
+            <p>
+              <strong>TypeScript</strong> — это надстройка над JavaScript,
+              которая добавляет <strong>статическую типизацию</strong>.
+            </p>
+
+            <p>
+              TypeScript помогает находить ошибки ещё во время разработки и
+              делает код более понятным и безопасным.
+            </p>
+
+            <pre class="code"><code>let name: string = "Alex";
+    let age: number = 25;</code></pre>
+
+            <p class="note">TypeScript компилируется в обычный JavaScript.</p>
+          </section>
+
+          <section class="card card--solid content-flow" id="basic-types">
+            <h2 class="section-title">Базовые типы</h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Тип</th>
+                    <th>Пример</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>string</td>
+                    <td>"Hello"</td>
+                  </tr>
+                  <tr>
+                    <td>number</td>
+                    <td>42</td>
+                  </tr>
+                  <tr>
+                    <td>boolean</td>
+                    <td>true / false</td>
+                  </tr>
+                  <tr>
+                    <td>any</td>
+                    <td>любой тип</td>
+                  </tr>
+                  <tr>
+                    <td>unknown</td>
+                    <td>неизвестный тип</td>
+                  </tr>
+                  <tr>
+                    <td>void</td>
+                    <td>нет возвращаемого значения</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card card--solid content-flow" id="typing-variables">
+            <h2 class="section-title">Типизация переменных</h2>
+
+            <pre class="code"><code>let username: string = "Alex";
+    let age: number = 30;
+    let isAdmin: boolean = false;</code></pre>
+
+            <p>TypeScript может автоматически определить тип:</p>
+
+            <pre class="code"><code>let username = "Alex";</code></pre>
+          </section>
+
+          <section class="card card--solid content-flow" id="functions">
+            <h2 class="section-title">Типизация функций</h2>
+
+            <pre class="code"><code>function sum(a: number, b: number): number {
+      return a + b;
+    }</code></pre>
+
+            <pre class="code"><code>const greet = (name: string): string => {
+      return "Hello " + name;
+    }</code></pre>
+          </section>
+
+          <section class="card card--solid content-flow" id="interfaces">
+            <h2 class="section-title">Интерфейсы</h2>
+
+            <pre class="code"><code>interface User {
+      name: string
+      age: number
+      isAdmin: boolean
+    }</code></pre>
+
+            <pre class="code"><code>const user: User = {
+      name: "Alex",
+      age: 25,
+      isAdmin: false
+    }</code></pre>
+
+            <p>Интерфейсы описывают структуру объектов.</p>
+          </section>
+
+          <section class="card card--solid content-flow" id="types">
+            <h2 class="section-title">Type aliases</h2>
+
+            <pre class="code"><code>type ID = string | number</code></pre>
+
+            <pre class="code"><code>type User = {
+      name: string
+      age: number
+    }</code></pre>
+          </section>
+
+          <section class="card card--solid content-flow" id="arrays">
+            <h2 class="section-title">Массивы</h2>
+
+            <pre class="code"><code>const numbers: number[] = [1,2,3]
+
+    const users: User[] = []</code></pre>
+          </section>
+
+          <section class="card card--solid content-flow" id="generics">
+            <h2 class="section-title">Generics</h2>
+
+            <pre class="code"><code>function identity&lt;T&gt;(value: T): T {
+      return value
+    }</code></pre>
+
+            <pre class="code"><code>identity&lt;number&gt;(5)
+    identity&lt;string&gt;("hello")</code></pre>
+
+            <p>Generics позволяют писать универсальный код.</p>
+          </section>
+
+          <section class="card card--solid content-flow" id="classes">
+            <h2 class="section-title">Классы</h2>
+
+            <pre class="code"><code>class User {
+      name: string
+
+      constructor(name: string) {
+        this.name = name
+      }
+    }</code></pre>
+          </section>
+
+          <section class="card card--solid content-flow" id="utility-types">
+            <h2 class="section-title">Полезные utility типы</h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Тип</th>
+                    <th>Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Partial&lt;T&gt;</td>
+                    <td>делает поля необязательными</td>
+                  </tr>
+                  <tr>
+                    <td>Readonly&lt;T&gt;</td>
+                    <td>делает объект только для чтения</td>
+                  </tr>
+                  <tr>
+                    <td>Pick&lt;T&gt;</td>
+                    <td>выбирает нужные поля</td>
+                  </tr>
+                  <tr>
+                    <td>Omit&lt;T&gt;</td>
+                    <td>убирает поля</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card card--solid content-flow" id="remember">
+            <h2 class="section-title">Что важно запомнить</h2>
+            <ul>
+              <li>TypeScript — это JavaScript + типы</li>
+              <li>типы помогают находить ошибки заранее</li>
+              <li>интерфейсы описывают структуру объектов</li>
+              <li>generics позволяют писать универсальный код</li>
+              <li>TypeScript компилируется в JavaScript</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">TypeScript Cheat Sheet</div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Наверх страницы">
+      <span class="back-to-top__progress"></span>
+      ↑
+    </button>
+
+    <script src="../js/ui.js"></script>
+  </body>
+</html>

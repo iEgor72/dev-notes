@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Шпаргалка по CSS для начинающих frontend-разработчиков: синтаксис, селекторы, box model, display, единицы измерения, специфичность и полезные свойства."
+    />
+    <title>Шпаргалка по CSS для начинающих</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content"
+      >Перейти к основному содержимому</a
+    >
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <nav class="nav" aria-label="Основная навигация">
+          <a class="nav__brand" href="../index.html">Developer Notes</a>
+
+          <ul class="nav__links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="html.html">HTML</a></li>
+            <li>
+              <a href="css.html" class="active" aria-current="page">CSS</a>
+            </li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="git.html">Git</a></li>
+            <li><a href="js.html">JavaScript</a></li>
+            <li><a href="ts.html">TypeScript</a></li>
+          </ul>
+        </nav>
+
+        <section class="hero card" aria-labelledby="page-title">
+          <span class="badge">CSS</span>
+
+          <div>
+            <h1 class="title" id="page-title">Шпаргалка по CSS</h1>
+            <p class="subtitle">
+              Синтаксис, селекторы, box model, display, размеры, цвета и базовые
+              правила оформления элементов.
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="container page-stack" id="main-content">
+      <div class="docs-layout">
+        <nav class="card card--solid toc" aria-labelledby="toc-title">
+          <h2 class="section-title" id="toc-title">Содержание</h2>
+          <ol>
+            <li><a href="#css-syntax">Синтаксис CSS</a></li>
+            <li><a href="#selectors">CSS-селекторы</a></li>
+            <li><a href="#common-properties">Основные CSS-свойства</a></li>
+            <li><a href="#box-model">Box Model</a></li>
+            <li><a href="#display">Display</a></li>
+            <li><a href="#units">Единицы измерения</a></li>
+            <li><a href="#specificity">Специфичность</a></li>
+            <li><a href="#cascade">Каскад и порядок правил</a></li>
+            <li><a href="#positioning">Position</a></li>
+            <li><a href="#colors-backgrounds">Цвета и фоны</a></li>
+            <li><a href="#pseudo-classes">Псевдоклассы и псевдоэлементы</a></li>
+            <li><a href="#mistakes">Частые ошибки новичков</a></li>
+            <li><a href="#remember">Что важно запомнить</a></li>
+          </ol>
+        </nav>
+        <div class="docs-content">
+          <section
+            class="card card--solid content-flow"
+            id="css-syntax"
+            aria-labelledby="css-syntax-title"
+          >
+            <h2 class="section-title" id="css-syntax-title">Синтаксис CSS</h2>
+
+            <pre class="code"><code>p {
+  color: red;
+  font-size: 18px;
+}</code></pre>
+
+            <p>
+              CSS-правило состоит из <strong>селектора</strong> и блока
+              объявлений. Внутри блока пишутся <strong>свойства</strong> и их
+              <strong>значения</strong>.
+            </p>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Из чего состоит CSS-правило
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Часть</th>
+                    <th scope="col">Что означает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>p</code></td>
+                    <td>
+                      Селектор: выбирает, к каким элементам применить стиль
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>color</code></td>
+                    <td>Свойство: что именно меняем</td>
+                  </tr>
+                  <tr>
+                    <td><code>red</code></td>
+                    <td>Значение: каким будет новое состояние свойства</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              После каждого свойства со значением ставится двоеточие, а в конце
+              объявления — точка с запятой.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="selectors"
+            aria-labelledby="selectors-title"
+          >
+            <h2 class="section-title" id="selectors-title">CSS-селекторы</h2>
+
+            <pre class="code"><code>p { }
+
+.card { }
+
+#header { }
+
+.menu a { }
+
+button:hover { }</code></pre>
+
+            <ul>
+              <li>
+                <strong><code>p</code></strong> — селектор по тегу
+              </li>
+              <li>
+                <strong><code>.card</code></strong> — селектор по классу
+              </li>
+              <li>
+                <strong><code>#header</code></strong> — селектор по
+                <code>id</code>
+              </li>
+              <li>
+                <strong><code>.menu a</code></strong> — селектор потомка
+              </li>
+              <li>
+                <strong><code>button:hover</code></strong> — стиль при наведении
+              </li>
+            </ul>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Популярные типы селекторов
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Селектор</th>
+                    <th scope="col">Что выбирает</th>
+                    <th scope="col">Пример</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>*</code></td>
+                    <td>Все элементы</td>
+                    <td><code>* { box-sizing: border-box; }</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>.class</code></td>
+                    <td>Элементы с классом</td>
+                    <td><code>.card { padding: 20px; }</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>#id</code></td>
+                    <td>Элемент с конкретным id</td>
+                    <td><code>#header { background: #111; }</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>a:hover</code></td>
+                    <td>Состояние элемента</td>
+                    <td><code>a:hover { color: tomato; }</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>.card p</code></td>
+                    <td>Элементы внутри другого элемента</td>
+                    <td><code>.card p { margin: 0; }</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              В реальной практике классы используют чаще, чем селекторы по тегу
+              или <code>id</code>, потому что они удобнее и гибче.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="common-properties"
+            aria-labelledby="common-properties-title"
+          >
+            <h2 class="section-title" id="common-properties-title">
+              Основные CSS-свойства
+            </h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Часто используемые CSS-свойства
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>color</code></td>
+                    <td>Цвет текста</td>
+                  </tr>
+                  <tr>
+                    <td><code>background</code></td>
+                    <td>Фон элемента</td>
+                  </tr>
+                  <tr>
+                    <td><code>font-size</code></td>
+                    <td>Размер текста</td>
+                  </tr>
+                  <tr>
+                    <td><code>font-family</code></td>
+                    <td>Шрифт</td>
+                  </tr>
+                  <tr>
+                    <td><code>margin</code></td>
+                    <td>Внешний отступ</td>
+                  </tr>
+                  <tr>
+                    <td><code>padding</code></td>
+                    <td>Внутренний отступ</td>
+                  </tr>
+                  <tr>
+                    <td><code>border</code></td>
+                    <td>Рамка элемента</td>
+                  </tr>
+                  <tr>
+                    <td><code>border-radius</code></td>
+                    <td>Скругление углов</td>
+                  </tr>
+                  <tr>
+                    <td><code>box-shadow</code></td>
+                    <td>Тень блока</td>
+                  </tr>
+                  <tr>
+                    <td><code>width</code> / <code>height</code></td>
+                    <td>Ширина и высота элемента</td>
+                  </tr>
+                  <tr>
+                    <td><code>display</code></td>
+                    <td>Определяет способ отображения элемента</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="box-model"
+            aria-labelledby="box-model-title"
+          >
+            <h2 class="section-title" id="box-model-title">Box Model</h2>
+
+            <pre class="code"><code>.card {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin: 20px;
+}</code></pre>
+
+            <p>
+              Каждый HTML-элемент можно представить как прямоугольник, который
+              состоит из:
+              <strong>content</strong>, <strong>padding</strong>,
+              <strong>border</strong> и <strong>margin</strong>.
+            </p>
+
+            <ul>
+              <li><strong>content</strong> — содержимое элемента</li>
+              <li><strong>padding</strong> — внутренний отступ</li>
+              <li><strong>border</strong> — рамка</li>
+              <li><strong>margin</strong> — внешний отступ</li>
+            </ul>
+
+            <p class="note">
+              Очень полезное правило почти для любого проекта:
+              <code>* { box-sizing: border-box; }</code>. Тогда ширина и высота
+              считаются удобнее.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="display"
+            aria-labelledby="display-title"
+          >
+            <h2 class="section-title" id="display-title">Display</h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Популярные значения свойства display
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Значение</th>
+                    <th scope="col">Описание</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>block</code></td>
+                    <td>Элемент занимает всю доступную строку</td>
+                  </tr>
+                  <tr>
+                    <td><code>inline</code></td>
+                    <td>
+                      Элемент идёт в строку и обычно не принимает width/height
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>inline-block</code></td>
+                    <td>Идёт в строку, но можно задавать размеры</td>
+                  </tr>
+                  <tr>
+                    <td><code>flex</code></td>
+                    <td>
+                      Включает Flexbox для удобного выравнивания элементов
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>grid</code></td>
+                    <td>Включает Grid для построения сеток</td>
+                  </tr>
+                  <tr>
+                    <td><code>none</code></td>
+                    <td>Полностью скрывает элемент</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre class="code"><code>.menu {
+  display: flex;
+  gap: 12px;
+}</code></pre>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="units"
+            aria-labelledby="units-title"
+          >
+            <h2 class="section-title" id="units-title">Единицы измерения</h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Частые единицы в CSS
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Единица</th>
+                    <th scope="col">Что означает</th>
+                    <th scope="col">Когда использовать</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>px</code></td>
+                    <td>Пиксели</td>
+                    <td>Точные размеры: рамки, отступы, тени</td>
+                  </tr>
+                  <tr>
+                    <td><code>%</code></td>
+                    <td>Проценты от родителя</td>
+                    <td>Гибкая ширина и размеры</td>
+                  </tr>
+                  <tr>
+                    <td><code>em</code></td>
+                    <td>Относительно текущего размера шрифта</td>
+                    <td>Локальное масштабирование</td>
+                  </tr>
+                  <tr>
+                    <td><code>rem</code></td>
+                    <td>Относительно размера шрифта корневого элемента</td>
+                    <td>Размеры текста и отступов по всей системе</td>
+                  </tr>
+                  <tr>
+                    <td><code>vw</code> / <code>vh</code></td>
+                    <td>Относительно окна браузера</td>
+                    <td>Крупные адаптивные блоки и секции</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              Для типографики и отступов часто удобно использовать
+              <code>rem</code>, а не только <code>px</code>.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="specificity"
+            aria-labelledby="specificity-title"
+          >
+            <h2 class="section-title" id="specificity-title">Специфичность</h2>
+
+            <p>
+              Если к одному и тому же элементу подходят несколько правил,
+              браузер решает, какое из них важнее. Это и называется
+              <strong>специфичностью</strong>.
+            </p>
+
+            <pre class="code"><code>p {
+  color: blue;
+}
+
+.card p {
+  color: green;
+}
+
+#intro {
+  color: red;
+}</code></pre>
+
+            <p>
+              Обычно приоритет растёт примерно так: селектор по тегу → класс →
+              <code>id</code>.
+            </p>
+
+            <p class="note">
+              Старайся не строить стили на множестве <code>id</code> и слишком
+              длинных селекторах. Проще поддерживать стили, основанные на
+              классах.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="cascade"
+            aria-labelledby="cascade-title"
+          >
+            <h2 class="section-title" id="cascade-title">
+              Каскад и порядок правил
+            </h2>
+
+            <p>
+              CSS расшифровывается как <strong>Cascading Style Sheets</strong>.
+              Это значит, что важен не только селектор, но и порядок, в котором
+              объявлены правила.
+            </p>
+
+            <pre class="code"><code>.title {
+  color: white;
+}
+
+.title {
+  color: orange;
+}</code></pre>
+
+            <p>
+              Если специфичность одинаковая, обычно сработает правило, которое
+              написано ниже.
+            </p>
+
+            <p class="note">
+              Поэтому лучше держать стили организованными и не дублировать
+              одинаковые селекторы без необходимости.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="positioning"
+            aria-labelledby="positioning-title"
+          >
+            <h2 class="section-title" id="positioning-title">Position</h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Популярные значения свойства position
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Значение</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>static</code></td>
+                    <td>Обычное положение элемента по умолчанию</td>
+                  </tr>
+                  <tr>
+                    <td><code>relative</code></td>
+                    <td>
+                      Позволяет сдвигать элемент относительно его обычного места
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>absolute</code></td>
+                    <td>
+                      Позиционирует элемент относительно ближайшего
+                      positioned-родителя
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>fixed</code></td>
+                    <td>Фиксирует элемент относительно окна браузера</td>
+                  </tr>
+                  <tr>
+                    <td><code>sticky</code></td>
+                    <td>
+                      Элемент ведёт себя как обычный, пока не «прилипнет» при
+                      прокрутке
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre class="code"><code>.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}</code></pre>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="colors-backgrounds"
+            aria-labelledby="colors-backgrounds-title"
+          >
+            <h2 class="section-title" id="colors-backgrounds-title">
+              Цвета и фоны
+            </h2>
+
+            <pre class="code"><code>.box {
+  color: #ffffff;
+  background: #1e293b;
+}
+
+.button {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+}</code></pre>
+
+            <p>В CSS цвет можно задавать по-разному:</p>
+            <ul>
+              <li><code>red</code> — имя цвета</li>
+              <li><code>#8b5cf6</code> — hex-цвет</li>
+              <li><code>rgb(139, 92, 246)</code> — RGB</li>
+              <li>
+                <code>rgba(139, 92, 246, 0.2)</code> — RGB с прозрачностью
+              </li>
+            </ul>
+
+            <p class="note">
+              Следи за контрастом текста и фона: текст должен хорошо читаться, а
+              не просто красиво выглядеть.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="pseudo-classes"
+            aria-labelledby="pseudo-classes-title"
+          >
+            <h2 class="section-title" id="pseudo-classes-title">
+              Псевдоклассы и псевдоэлементы
+            </h2>
+
+            <pre class="code"><code>a:hover {
+  color: tomato;
+}
+
+button:focus-visible {
+  outline: 2px solid blue;
+}
+
+.card::before {
+  content: "";
+}</code></pre>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Частые псевдоклассы и псевдоэлементы
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Запись</th>
+                    <th scope="col">Что означает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>:hover</code></td>
+                    <td>Состояние при наведении</td>
+                  </tr>
+                  <tr>
+                    <td><code>:focus</code> / <code>:focus-visible</code></td>
+                    <td>
+                      Состояние при фокусе с клавиатуры или другим способом
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>:first-child</code></td>
+                    <td>Первый дочерний элемент</td>
+                  </tr>
+                  <tr>
+                    <td><code>::before</code></td>
+                    <td>Виртуальный элемент перед содержимым</td>
+                  </tr>
+                  <tr>
+                    <td><code>::after</code></td>
+                    <td>Виртуальный элемент после содержимого</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="mistakes"
+            aria-labelledby="mistakes-title"
+          >
+            <h2 class="section-title" id="mistakes-title">
+              Частые ошибки новичков
+            </h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Типичные ошибки в CSS
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Ошибка</th>
+                    <th scope="col">Почему плохо</th>
+                    <th scope="col">Как лучше</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Слишком длинные селекторы</td>
+                    <td>Стили сложнее поддерживать и переопределять</td>
+                    <td>Использовать понятные классы</td>
+                  </tr>
+                  <tr>
+                    <td>Часто использовать <code>!important</code></td>
+                    <td>Ломает предсказуемость каскада</td>
+                    <td>Разобраться со специфичностью и порядком правил</td>
+                  </tr>
+                  <tr>
+                    <td>Задавать всё только в <code>px</code></td>
+                    <td>Интерфейс хуже масштабируется</td>
+                    <td>
+                      Комбинировать <code>px</code>, <code>rem</code>,
+                      <code>%</code>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Убирать фокус у кнопок и ссылок</td>
+                    <td>Страница становится менее доступной</td>
+                    <td>Оставлять видимый <code>:focus-visible</code></td>
+                  </tr>
+                  <tr>
+                    <td>Красить текст без проверки контраста</td>
+                    <td>Текст может быть плохо читаем</td>
+                    <td>Проверять читаемость текста на фоне</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="compare">
+              <div class="card">
+                <h3>Плохо</h3>
+                <pre class="code"><code>.header .menu ul li a {
+  color: white;
+}</code></pre>
+              </div>
+
+              <div class="card">
+                <h3>Лучше</h3>
+                <pre class="code"><code>.menu-link {
+  color: white;
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="remember"
+            aria-labelledby="remember-title"
+          >
+            <h2 class="section-title" id="remember-title">
+              Что важно запомнить
+            </h2>
+            <ul>
+              <li>CSS отвечает за внешний вид элементов</li>
+              <li>Стиль строится из селектора, свойства и значения</li>
+              <li>
+                Классы обычно удобнее, чем длинные селекторы и <code>id</code>
+              </li>
+              <li>
+                <code>margin</code> — снаружи, <code>padding</code> — внутри
+              </li>
+              <li>
+                <code>display</code>, <code>position</code> и box model сильно
+                влияют на layout
+              </li>
+              <li>Важны каскад, специфичность и порядок правил</li>
+              <li>
+                Не ломай доступность: оставляй видимый фокус и хороший контраст
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>CSS Cheat Sheet</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Наверх страницы">
+      <span class="back-to-top__progress"></span>
+      ↑
+    </button>
+
+    <script src="../js/ui.js"></script>
+  </body>
+</html>

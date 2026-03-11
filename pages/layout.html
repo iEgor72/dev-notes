@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Шпаргалка по Layout для начинающих frontend-разработчиков: Flexbox, Grid, Position, адаптивность, контейнеры, выравнивание и построение макетов."
+    />
+    <title>Шпаргалка по Layout для начинающих</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content"
+      >Перейти к основному содержимому</a
+    >
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <nav class="nav" aria-label="Основная навигация">
+          <a class="nav__brand" href="../index.html">Developer Notes</a>
+
+          <ul class="nav__links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="html.html">HTML</a></li>
+            <li><a href="css.html">CSS</a></li>
+            <li>
+              <a href="layout.html" class="active" aria-current="page"
+                >Layout</a
+              >
+            </li>
+            <li><a href="git.html">Git</a></li>
+            <li><a href="js.html">JavaScript</a></li>
+            <li><a href="ts.html">TypeScript</a></li>
+          </ul>
+        </nav>
+
+        <section class="hero card" aria-labelledby="page-title">
+          <span class="badge">Layout</span>
+
+          <div>
+            <h1 class="title" id="page-title">Flexbox, Grid и Position</h1>
+            <p class="subtitle">
+              Шпаргалка по построению макетов, выравниванию элементов, работе с
+              контейнерами и адаптивности.
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="container page-stack" id="main-content">
+      <div class="docs-layout">
+        <nav class="card card--solid toc" aria-labelledby="toc-title">
+          <h2 class="section-title" id="toc-title">Содержание</h2>
+          <ol>
+            <li><a href="#flexbox">Flexbox</a></li>
+            <li><a href="#grid">Grid</a></li>
+            <li><a href="#position">Position</a></li>
+            <li><a href="#containers">Контейнеры и ширина</a></li>
+            <li><a href="#alignment">Выравнивание</a></li>
+            <li><a href="#responsive">Адаптивность</a></li>
+            <li><a href="#layout-patterns">Частые паттерны layout</a></li>
+            <li><a href="#mistakes">Частые ошибки новичков</a></li>
+            <li><a href="#remember">Что важно запомнить</a></li>
+          </ol>
+        </nav>
+        <div class="docs-content">
+          <section
+            class="card card--solid content-flow"
+            id="flexbox"
+            aria-labelledby="flexbox-title"
+          >
+            <h2 class="section-title" id="flexbox-title">Flexbox</h2>
+
+            <pre class="code"><code>.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}</code></pre>
+
+            <p>
+              <strong>Flexbox</strong> удобен, когда нужно расположить элементы
+              в одну строку или в один столбец и контролировать расстояния и
+              выравнивание.
+            </p>
+
+            <ul>
+              <li>
+                <strong><code>display: flex</code></strong> — включает
+                flex-контекст
+              </li>
+              <li>
+                <strong><code>justify-content</code></strong> — выравнивание по
+                главной оси
+              </li>
+              <li>
+                <strong><code>align-items</code></strong> — выравнивание по
+                поперечной оси
+              </li>
+              <li>
+                <strong><code>gap</code></strong> — расстояние между элементами
+              </li>
+              <li>
+                <strong><code>flex-direction</code></strong> — направление:
+                строка или столбец
+              </li>
+              <li>
+                <strong><code>flex-wrap</code></strong> — перенос элементов на
+                новую строку
+              </li>
+            </ul>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Частые свойства Flexbox
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>display: flex</code></td>
+                    <td>Включает Flexbox</td>
+                  </tr>
+                  <tr>
+                    <td><code>flex-direction</code></td>
+                    <td>Определяет направление элементов</td>
+                  </tr>
+                  <tr>
+                    <td><code>justify-content</code></td>
+                    <td>Распределяет элементы по главной оси</td>
+                  </tr>
+                  <tr>
+                    <td><code>align-items</code></td>
+                    <td>Выравнивает элементы по поперечной оси</td>
+                  </tr>
+                  <tr>
+                    <td><code>gap</code></td>
+                    <td>Добавляет расстояние между элементами</td>
+                  </tr>
+                  <tr>
+                    <td><code>flex-wrap</code></td>
+                    <td>Разрешает перенос элементов</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              Flexbox особенно хорош для меню, кнопок, карточек в строку и
+              выравнивания элементов внутри одного блока.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="grid"
+            aria-labelledby="grid-title"
+          >
+            <h2 class="section-title" id="grid-title">Grid</h2>
+
+            <pre class="code"><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}</code></pre>
+
+            <p>
+              <strong>Grid</strong> удобен, когда нужно строить сетки: несколько
+              колонок, ряды, карточки, большие секции страницы и более сложные
+              макеты.
+            </p>
+
+            <ul>
+              <li>
+                <strong><code>display: grid</code></strong> — включает сетку
+              </li>
+              <li>
+                <strong><code>grid-template-columns</code></strong> — задаёт
+                колонки
+              </li>
+              <li>
+                <strong><code>grid-template-rows</code></strong> — задаёт ряды
+              </li>
+              <li>
+                <strong><code>gap</code></strong> — расстояние между ячейками
+              </li>
+              <li>
+                <strong><code>grid-column</code></strong> — управляет шириной
+                элемента по колонкам
+              </li>
+              <li>
+                <strong><code>grid-row</code></strong> — управляет положением
+                элемента по рядам
+              </li>
+            </ul>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Частые свойства Grid
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что делает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>display: grid</code></td>
+                    <td>Включает CSS Grid</td>
+                  </tr>
+                  <tr>
+                    <td><code>grid-template-columns</code></td>
+                    <td>Задаёт количество и размер колонок</td>
+                  </tr>
+                  <tr>
+                    <td><code>grid-template-rows</code></td>
+                    <td>Задаёт ряды</td>
+                  </tr>
+                  <tr>
+                    <td><code>gap</code></td>
+                    <td>Добавляет расстояние между ячейками</td>
+                  </tr>
+                  <tr>
+                    <td><code>grid-column</code></td>
+                    <td>Позволяет элементу занять несколько колонок</td>
+                  </tr>
+                  <tr>
+                    <td><code>grid-row</code></td>
+                    <td>Позволяет элементу занять несколько рядов</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="note">
+              Grid чаще всего удобнее для макета всей секции или страницы, а
+              Flexbox — для расположения элементов внутри блока.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="position"
+            aria-labelledby="position-title"
+          >
+            <h2 class="section-title" id="position-title">Position</h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Популярные значения свойства position
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Значение</th>
+                    <th scope="col">Описание</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>static</code></td>
+                    <td>Обычное положение элемента по умолчанию</td>
+                  </tr>
+                  <tr>
+                    <td><code>relative</code></td>
+                    <td>
+                      Позволяет сдвигать элемент относительно его обычного места
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>absolute</code></td>
+                    <td>
+                      Позиционирует элемент относительно ближайшего
+                      positioned-родителя
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>fixed</code></td>
+                    <td>Фиксирует элемент относительно окна браузера</td>
+                  </tr>
+                  <tr>
+                    <td><code>sticky</code></td>
+                    <td>Элемент «прилипает» при прокрутке</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre class="code"><code>.parent {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}</code></pre>
+
+            <p class="note">
+              Если используешь <code>position: absolute</code>, часто родителю
+              задают <code>position: relative</code>, чтобы дочерний элемент
+              позиционировался внутри него.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="containers"
+            aria-labelledby="containers-title"
+          >
+            <h2 class="section-title" id="containers-title">
+              Контейнеры и ширина
+            </h2>
+
+            <pre class="code"><code>.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}</code></pre>
+
+            <p>
+              Контейнер помогает ограничить ширину контента, чтобы текст и блоки
+              не растягивались слишком широко на больших экранах.
+            </p>
+
+            <ul>
+              <li><code>width: 100%</code> — блок занимает доступную ширину</li>
+              <li><code>max-width</code> — ограничивает максимальную ширину</li>
+              <li><code>margin: 0 auto</code> — центрирует контейнер</li>
+              <li><code>padding</code> — даёт внутренние отступы по краям</li>
+            </ul>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="alignment"
+            aria-labelledby="alignment-title"
+          >
+            <h2 class="section-title" id="alignment-title">Выравнивание</h2>
+
+            <p>
+              В layout чаще всего нужно управлять двумя вещами: положением и
+              расстояниями.
+            </p>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Частые способы выравнивания
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Инструмент</th>
+                    <th scope="col">Для чего нужен</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>justify-content</code></td>
+                    <td>Распределение элементов по главной оси</td>
+                  </tr>
+                  <tr>
+                    <td><code>align-items</code></td>
+                    <td>Выравнивание элементов по поперечной оси</td>
+                  </tr>
+                  <tr>
+                    <td><code>gap</code></td>
+                    <td>Расстояние между элементами</td>
+                  </tr>
+                  <tr>
+                    <td><code>margin: 0 auto</code></td>
+                    <td>Центрирование блочного элемента по горизонтали</td>
+                  </tr>
+                  <tr>
+                    <td><code>text-align: center</code></td>
+                    <td>Выравнивание текста и inline-элементов</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <pre class="code"><code>.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}</code></pre>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="responsive"
+            aria-labelledby="responsive-title"
+          >
+            <h2 class="section-title" id="responsive-title">Адаптивность</h2>
+
+            <pre class="code"><code>@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}</code></pre>
+
+            <p>
+              <strong>Media queries</strong> используются для адаптации сайта
+              под разные размеры экрана: мобильные устройства, планшеты и
+              большие мониторы.
+            </p>
+
+            <ul>
+              <li>уменьшать количество колонок на маленьких экранах;</li>
+              <li>увеличивать отступы и размеры текста при необходимости;</li>
+              <li>перестраивать навигацию и карточки;</li>
+              <li>делать интерфейс удобным без горизонтальной прокрутки.</li>
+            </ul>
+
+            <p class="note">
+              Хороший адаптивный интерфейс не просто «сжимается», а
+              перестраивается так, чтобы им было удобно пользоваться на любом
+              экране.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="layout-patterns"
+            aria-labelledby="layout-patterns-title"
+          >
+            <h2 class="section-title" id="layout-patterns-title">
+              Частые паттерны layout
+            </h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Какой инструмент layout обычно выбирать
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Задача</th>
+                    <th scope="col">Что обычно подходит</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Меню в одну строку</td>
+                    <td>Flexbox</td>
+                  </tr>
+                  <tr>
+                    <td>Карточки в несколько колонок</td>
+                    <td>Grid</td>
+                  </tr>
+                  <tr>
+                    <td>Центрирование блока</td>
+                    <td>Flexbox или <code>margin: 0 auto</code></td>
+                  </tr>
+                  <tr>
+                    <td>Бейдж поверх карточки</td>
+                    <td>Position absolute + relative</td>
+                  </tr>
+                  <tr>
+                    <td>Адаптация под мобильные</td>
+                    <td>Media queries + гибкие размеры</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="mistakes"
+            aria-labelledby="mistakes-title"
+          >
+            <h2 class="section-title" id="mistakes-title">
+              Частые ошибки новичков
+            </h2>
+
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Типичные ошибки при работе с layout
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Ошибка</th>
+                    <th scope="col">Почему плохо</th>
+                    <th scope="col">Как лучше</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Пытаться строить весь layout только через
+                      <code>position</code>
+                    </td>
+                    <td>Макет становится хрупким и сложным в поддержке</td>
+                    <td>
+                      Сначала использовать Flexbox и Grid, а
+                      <code>position</code> — точечно
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Не ограничивать ширину контента</td>
+                    <td>Текст трудно читать на широких экранах</td>
+                    <td>Использовать контейнер с <code>max-width</code></td>
+                  </tr>
+                  <tr>
+                    <td>Не проверять мобильную версию</td>
+                    <td>Интерфейс может ломаться на маленьких экранах</td>
+                    <td>Добавлять media queries и тестировать responsive</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Использовать отступы через случайные
+                      <code>margin</code> везде
+                    </td>
+                    <td>Структура становится непредсказуемой</td>
+                    <td>Стараться строить систему отступов осознанно</td>
+                  </tr>
+                  <tr>
+                    <td>Не использовать <code>gap</code> в flex/grid</td>
+                    <td>Приходится вручную задавать много лишних отступов</td>
+                    <td>По возможности использовать <code>gap</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="compare">
+              <div class="card">
+                <h3>Плохо</h3>
+                <pre class="code"><code>.card {
+  position: absolute;
+  left: 100px;
+  top: 200px;
+}</code></pre>
+              </div>
+
+              <div class="card">
+                <h3>Лучше</h3>
+                <pre class="code"><code>.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="remember"
+            aria-labelledby="remember-title"
+          >
+            <h2 class="section-title" id="remember-title">
+              Что важно запомнить
+            </h2>
+            <ul>
+              <li>
+                Flexbox удобен для выравнивания элементов в строку или столбец
+              </li>
+              <li>Grid удобен для сеток и сложных секций</li>
+              <li>
+                <code>position</code> нужен точечно, а не для всего layout
+              </li>
+              <li>
+                Контейнер с <code>max-width</code> делает страницу удобнее для
+                чтения
+              </li>
+              <li>
+                <code>gap</code> помогает делать чистые и понятные расстояния
+                между элементами
+              </li>
+              <li>Адаптивность — обязательная часть современного интерфейса</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>Layout Cheat Sheet</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Наверх страницы">
+      <span class="back-to-top__progress"></span>
+      ↑
+    </button>
+
+    <script src="../js/ui.js"></script>
+  </body>
+</html>
