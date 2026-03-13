@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Шпаргалка по React для начинающих frontend-разработчиков: JSX, компоненты, props, state, события, условный рендеринг и списки."
+    />
+    <title>Developer React</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      Перейти к основному содержимому
+    </a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <nav class="nav" aria-label="Основная навигация">
+          <a class="nav__brand" href="../index.html">Developer Notes</a>
+
+          <ul class="nav__links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="html.html">HTML</a></li>
+            <li><a href="css.html">CSS</a></li>
+            <li><a href="layout.html">Layout</a></li>
+            <li><a href="git.html">Git</a></li>
+            <li><a href="js.html">JavaScript</a></li>
+            <li><a href="ts.html">TypeScript</a></li>
+            <li>
+              <a href="react.html" class="active" aria-current="page">React</a>
+            </li>
+          </ul>
+        </nav>
+
+        <section class="hero card" aria-labelledby="page-title">
+          <span class="badge">React</span>
+          <div>
+            <h1 class="title" id="page-title">Шпаргалка по React</h1>
+            <p class="subtitle">
+              JSX, компоненты, props, state, события, условный рендеринг и
+              списки — с простыми объяснениями, примерами и понятной логикой для
+              старта.
+            </p>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="container page-stack" id="main-content">
+      <div class="docs-layout">
+        <nav class="card card--solid toc" aria-labelledby="toc-title">
+          <h2 class="section-title" id="toc-title">Содержание</h2>
+          <ol>
+            <li><a href="#what-is-react">Что такое React</a></li>
+            <li><a href="#why-react">Зачем нужен React</a></li>
+            <li><a href="#spa-idea">Как React работает</a></li>
+            <li><a href="#jsx">Что такое JSX</a></li>
+            <li><a href="#components">Компоненты</a></li>
+            <li><a href="#props">Props</a></li>
+            <li><a href="#state">State</a></li>
+            <li><a href="#events">События</a></li>
+            <li><a href="#conditional-rendering">Условный рендеринг</a></li>
+            <li><a href="#lists">Списки и key</a></li>
+            <li><a href="#usestate">useState</a></li>
+            <li><a href="#compare-js">React и обычный JavaScript</a></li>
+            <li><a href="#mistakes">Частые ошибки новичков</a></li>
+            <li><a href="#remember">Что важно запомнить</a></li>
+            <li><a href="#example">Мини-пример React-компонента</a></li>
+          </ol>
+        </nav>
+
+        <div class="docs-content">
+          <section
+            class="card card--solid content-flow"
+            id="what-is-react"
+            aria-labelledby="what-is-react-title"
+          >
+            <h2 class="section-title" id="what-is-react-title">
+              Что такое React
+            </h2>
+            <p>
+              <strong>React</strong> — это JavaScript-библиотека для создания
+              пользовательских интерфейсов.
+            </p>
+            <p>
+              React помогает собирать страницу из отдельных частей: кнопок,
+              карточек, форм, меню, модальных окон и других блоков.
+            </p>
+            <p class="note">
+              React не заменяет HTML, CSS и JavaScript. Он помогает удобнее
+              управлять интерфейсом и обновлять его при изменении данных.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="why-react"
+            aria-labelledby="why-react-title"
+          >
+            <h2 class="section-title" id="why-react-title">
+              Зачем нужен React
+            </h2>
+            <p>
+              Когда страница становится интерактивной, обычный JavaScript-код
+              начинает быстро разрастаться: нужно вручную искать элементы,
+              менять текст, классы, скрывать блоки и следить за состоянием.
+            </p>
+            <p>React упрощает эту задачу и даёт несколько важных преимуществ:</p>
+            <ul>
+              <li>интерфейс можно разбить на переиспользуемые компоненты</li>
+              <li>данные и отображение связаны между собой</li>
+              <li>страница обновляется автоматически при изменении состояния</li>
+              <li>сложные интерфейсы становятся проще поддерживать</li>
+            </ul>
+            <p class="note">
+              React особенно полезен там, где много переключателей, фильтров,
+              форм, вкладок, карточек и динамических блоков.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="spa-idea"
+            aria-labelledby="spa-idea-title"
+          >
+            <h2 class="section-title" id="spa-idea-title">
+              Как React работает
+            </h2>
+            <p>
+              В React интерфейс описывается как функция от данных. Ты говоришь,
+              <strong>что должно быть на экране</strong>, а React сам обновляет
+              DOM, когда данные меняются.
+            </p>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Упрощённая логика работы React
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Шаг</th>
+                    <th scope="col">Что происходит</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Компонент получает данные</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>React строит интерфейс на основе этих данных</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Пользователь нажимает кнопку или вводит текст</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Состояние меняется</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>React обновляет нужную часть интерфейса</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="jsx"
+            aria-labelledby="jsx-title"
+          >
+            <h2 class="section-title" id="jsx-title">Что такое JSX</h2>
+            <p>
+              <strong>JSX</strong> — это синтаксис, который внешне похож на
+              HTML, но используется внутри JavaScript.
+            </p>
+            <p>
+              С помощью JSX удобно описывать, как должен выглядеть интерфейс.
+            </p>
+            <pre class="code"><code>function App() {
+  return (
+    &lt;section&gt;
+      &lt;h1&gt;Привет, React&lt;/h1&gt;
+      &lt;p&gt;Это мой первый компонент.&lt;/p&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+            <p class="note">
+              JSX похож на HTML, но это не чистый HTML. Например, вместо
+              <code>class</code> используется <code>className</code>.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="components"
+            aria-labelledby="components-title"
+          >
+            <h2 class="section-title" id="components-title">Компоненты</h2>
+            <p>
+              Компонент — это самостоятельная часть интерфейса. Например,
+              карточка товара, кнопка, шапка сайта или форма поиска.
+            </p>
+            <p>
+              В React интерфейс строится из компонентов, которые можно
+              вкладывать друг в друга.
+            </p>
+            <pre class="code"><code>function Header() {
+  return &lt;header&gt;Мой сайт&lt;/header&gt;;
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;main&gt;Контент страницы&lt;/main&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+            <p class="note">
+              Названия компонентов пишут с большой буквы. Это важное правило в
+              React.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="props"
+            aria-labelledby="props-title"
+          >
+            <h2 class="section-title" id="props-title">Props</h2>
+            <p>
+              <strong>Props</strong> — это входные данные компонента. Через них
+              родительский компонент передаёт значения дочернему.
+            </p>
+            <pre class="code"><code>function Welcome(props) {
+  return &lt;h2&gt;Привет, {props.name}!&lt;/h2&gt;;
+}
+
+function App() {
+  return &lt;Welcome name="Егор" /&gt;;
+}</code></pre>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Что важно знать о props
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Свойство</th>
+                    <th scope="col">Что означает</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Передаются сверху вниз</td>
+                    <td>От родительского компонента к дочернему</td>
+                  </tr>
+                  <tr>
+                    <td>Только для чтения</td>
+                    <td>Нельзя изменять props внутри компонента</td>
+                  </tr>
+                  <tr>
+                    <td>Подходят для настройки</td>
+                    <td>Через props удобно менять текст, данные и поведение</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="state"
+            aria-labelledby="state-title"
+          >
+            <h2 class="section-title" id="state-title">State</h2>
+            <p>
+              <strong>State</strong> — это внутренние данные компонента, которые
+              могут меняться во время работы.
+            </p>
+            <p>
+              Например: открыто ли меню, какой текст ввёл пользователь, активна
+              ли вкладка, сколько раз нажали на кнопку.
+            </p>
+            <pre class="code"><code>const [count, setCount] = useState(0);</code></pre>
+            <p>
+              Здесь <code>count</code> — текущее значение, а
+              <code>setCount</code> — функция для его обновления.
+            </p>
+            <p class="note">
+              Когда state меняется, React заново отрисовывает компонент с новым
+              значением.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="events"
+            aria-labelledby="events-title"
+          >
+            <h2 class="section-title" id="events-title">События</h2>
+            <p>
+              В React можно обрабатывать клики, ввод текста, отправку формы и
+              другие действия пользователя.
+            </p>
+            <pre class="code"><code>function ButtonExample() {
+  function handleClick() {
+    alert("Кнопка нажата");
+  }
+
+  return &lt;button onClick={handleClick}&gt;Нажми&lt;/button&gt;;
+}</code></pre>
+            <p>
+              Имена обработчиков часто начинаются с <code>handle</code>, а сами
+              события записываются в camelCase: <code>onClick</code>,
+              <code>onChange</code>, <code>onSubmit</code>.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="conditional-rendering"
+            aria-labelledby="conditional-rendering-title"
+          >
+            <h2 class="section-title" id="conditional-rendering-title">
+              Условный рендеринг
+            </h2>
+            <p>
+              В React можно показывать разный интерфейс в зависимости от
+              условий.
+            </p>
+            <pre class="code"><code>function Status({ isLoggedIn }) {
+  return (
+    &lt;div&gt;
+      {isLoggedIn ? &lt;p&gt;Вы вошли&lt;/p&gt; : &lt;p&gt;Войдите в аккаунт&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre>
+            <p>
+              Это удобно для показа кнопок, сообщений, ошибок, загрузки и
+              разных состояний интерфейса.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="lists"
+            aria-labelledby="lists-title"
+          >
+            <h2 class="section-title" id="lists-title">Списки и key</h2>
+            <p>
+              Когда нужно вывести массив данных, обычно используют
+              <code>map()</code>.
+            </p>
+            <pre class="code"><code>function TechList() {
+  const items = ["HTML", "CSS", "React"];
+
+  return (
+    &lt;ul&gt;
+      {items.map((item) =&gt; (
+        &lt;li key={item}&gt;{item}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+            <p>
+              Атрибут <code>key</code> нужен React, чтобы понимать, какой именно
+              элемент списка изменился.
+            </p>
+            <p class="note">
+              Не используй случайные значения для <code>key</code>. Лучше давать
+              стабильный уникальный идентификатор.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="usestate"
+            aria-labelledby="usestate-title"
+          >
+            <h2 class="section-title" id="usestate-title">useState</h2>
+            <p>
+              <code>useState</code> — это хук, который позволяет хранить и
+              изменять состояние внутри функционального компонента.
+            </p>
+            <pre class="code"><code>import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Счётчик: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Увеличить
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+            <div class="compare">
+              <div class="card">
+                <h3>Что хранится</h3>
+                <p>
+                  <code>count</code> содержит текущее значение состояния.
+                </p>
+              </div>
+
+              <div class="card">
+                <h3>Что меняет</h3>
+                <p>
+                  <code>setCount</code> обновляет состояние и запускает
+                  перерисовку компонента.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="compare-js"
+            aria-labelledby="compare-js-title"
+          >
+            <h2 class="section-title" id="compare-js-title">
+              React и обычный JavaScript
+            </h2>
+            <p>
+              Обе технологии нужны. React не отменяет JavaScript, а строится на
+              нём.
+            </p>
+            <div class="compare">
+              <div class="card">
+                <h3>Обычный JavaScript</h3>
+                <pre class="code"><code>const box = document.getElementById("box");
+box.textContent = "Новый текст";</code></pre>
+              </div>
+
+              <div class="card">
+                <h3>React</h3>
+                <pre class="code"><code>function Message() {
+  const [text, setText] = useState("Привет");
+
+  return &lt;p&gt;{text}&lt;/p&gt;;
+}</code></pre>
+              </div>
+            </div>
+            <p class="note">
+              В обычном JavaScript ты чаще вручную меняешь DOM. В React ты
+              меняешь данные, а интерфейс обновляется сам.
+            </p>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="mistakes"
+            aria-labelledby="mistakes-title"
+          >
+            <h2 class="section-title" id="mistakes-title">
+              Частые ошибки новичков
+            </h2>
+            <div class="table-wrap">
+              <table class="table">
+                <caption>
+                  Ошибки при изучении React
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Ошибка</th>
+                    <th scope="col">Почему это плохо</th>
+                    <th scope="col">Как лучше</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Писать <code>class</code> вместо <code>className</code>
+                    </td>
+                    <td>JSX использует свои правила записи атрибутов</td>
+                    <td>Использовать <code>className</code></td>
+                  </tr>
+                  <tr>
+                    <td>Менять state напрямую</td>
+                    <td>React не увидит корректное обновление</td>
+                    <td>Использовать функцию обновления состояния</td>
+                  </tr>
+                  <tr>
+                    <td>Забывать <code>key</code> в списках</td>
+                    <td>React сложнее отслеживать элементы</td>
+                    <td>
+                      Указывать стабильный уникальный <code>key</code>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Называть компонент с маленькой буквы</td>
+                    <td>React воспримет его как обычный HTML-тег</td>
+                    <td>Писать компоненты с большой буквы</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="compare">
+              <div class="card">
+                <h3>Плохо</h3>
+                <pre class="code"><code>function button() {
+  return &lt;button&gt;Нажми&lt;/button&gt;;
+}</code></pre>
+              </div>
+
+              <div class="card">
+                <h3>Лучше</h3>
+                <pre class="code"><code>function Button() {
+  return &lt;button&gt;Нажми&lt;/button&gt;;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="compare">
+              <div class="card">
+                <h3>Плохо</h3>
+                <pre class="code"><code>count = count + 1;</code></pre>
+              </div>
+
+              <div class="card">
+                <h3>Лучше</h3>
+                <pre class="code"><code>setCount(count + 1);</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="card card--solid content-flow"
+            id="remember"
+            aria-labelledby="remember-title"
+          >
+            <h2 class="section-title" id="remember-title">
+              Что важно запомнить
+            </h2>
+            <ul>
+              <li>React нужен для создания интерфейсов</li>
+              <li>Интерфейс в React строится из компонентов</li>
+              <li>JSX похож на HTML, но это часть JavaScript-кода</li>
+              <li>Props передают данные в компонент</li>
+              <li>State хранит изменяемые данные компонента</li>
+              <li>При изменении state React обновляет интерфейс</li>
+              <li>Спискам нужен <code>key</code></li>
+              <li><code>useState</code> — один из базовых хуков React</li>
+            </ul>
+          </section>
+
+          <section
+            class="card card--solid"
+            id="example"
+            aria-labelledby="example-title"
+          >
+            <h2 class="section-title" id="example-title">
+              Мини-пример React-компонента
+            </h2>
+            <pre class="code"><code>import { useState } from "react";
+
+function FlexModeDemo() {
+  const [mode, setMode] = useState("flex");
+
+  return (
+    &lt;section&gt;
+      &lt;h2&gt;Display demo&lt;/h2&gt;
+
+      &lt;div&gt;
+        &lt;button onClick={() =&gt; setMode("block")}&gt;block&lt;/button&gt;
+        &lt;button onClick={() =&gt; setMode("flex")}&gt;flex&lt;/button&gt;
+        &lt;button onClick={() =&gt; setMode("grid")}&gt;grid&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div className={`demo demo--${mode}`}&gt;
+        &lt;div&gt;1&lt;/div&gt;
+        &lt;div&gt;2&lt;/div&gt;
+        &lt;div&gt;3&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+            <p class="note">
+              Это уже похоже на тот тип интерактивных демо, который ты хочешь
+              добавлять на сайт: кнопка меняет состояние, а интерфейс сразу
+              перестраивается.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <p class="footer-title">Developer Notes</p>
+
+            <p class="footer-text">
+              Личная база заметок по программированию и разработке. Короткие
+              объяснения, синтаксис и примеры кода.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <p class="footer-title">Проект</p>
+
+            <p class="footer-text">
+              Проект постепенно дополняется новыми заметками по различным
+              технологиям и инструментам разработки.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <p class="footer-title">Информация</p>
+
+            <p class="footer-text">
+              Компактная документация для быстрого повторения синтаксиса,
+              концепций и практических примеров.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Developer Notes • Personal developer handbook</p>
+        </div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Наверх страницы">
+      <span class="back-to-top__progress"></span>
+      ↑
+    </button>
+
+    <script src="../js/ui.js"></script>
+  </body>
+</html>
