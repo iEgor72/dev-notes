@@ -1,0 +1,57 @@
+:root {
+  --bg: #09090f;
+  --bg-soft: #0f111a;
+  --bg-elevated: #0b1124;
+
+  --surface: rgba(18, 21, 33, 0.82);
+  --surface-solid: #121521;
+  --surface-2: #171b2b;
+  --surface-strong: rgba(18, 24, 48, 0.96);
+
+  --text: #f8fafc;
+  --text-soft: #d6deea;
+  --text-muted: #b8c0e0;
+  --muted: #a7b4c8;
+
+  --accent: #8b5cf6;
+  --accent-2: #9b7cff;
+  --accent-soft: rgba(124, 140, 255, 0.14);
+  --accent-light: rgba(139, 92, 246, 0.14);
+  --accent-dark: #6d28d9;
+  --accent-strong: #c4b5fd;
+  --accent-link-hover: #ddd6fe;
+
+  --border: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(148, 163, 184, 0.24);
+  --color-border: #2a2f3a;
+
+  --code-bg: #0a0f1d;
+  --code-text: #e5e7eb;
+
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.22);
+  --shadow-sm: 0 6px 20px rgba(0, 0, 0, 0.28);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+  --shadow-md: 0 14px 36px rgba(0, 0, 0, 0.24);
+  --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.48);
+
+  --radius-xs: 10px;
+  --radius-sm: 12px;
+  --radius: 18px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  --container: 1180px;
+  --toc-progress: 0;
+
+  --font-main: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+}
