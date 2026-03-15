@@ -5,7 +5,6 @@ const layoutPageData = {
     "Простыми словами о том, как собирать экран: когда брать Flexbox, когда Grid, и как делать удобный адаптивный layout.",
   toc: [
     { id: "layout-intro", label: "Роль Layout в проекте" },
-    { id: "layout-format", label: "Как читать разделы" },
     { id: "flex-vs-grid", label: "Когда Flexbox, когда Grid" },
     { id: "app-shell", label: "Базовый app shell" },
     { id: "sidebar-content", label: "Sidebar + Content" },
@@ -40,42 +39,31 @@ const layoutPageData = {
       ],
     },
     {
-      id: "layout-format",
-      title: "Как читать разделы",
-      blocks: [
-        {
-          type: "subtitle",
-          content: "Простыми словами",
-        },
-        {
-          type: "text",
-          content:
-            "Сначала — что это за layout-паттерн без перегруза терминами.",
-        },
-        {
-          type: "subtitle",
-          content: "Когда применять",
-        },
-        {
-          type: "text",
-          content:
-            "Потом — в каком типе интерфейса этот паттерн будет уместен.",
-        },
-        {
-          type: "subtitle",
-          content: "Частая ошибка",
-        },
-        {
-          type: "text",
-          content:
-            "И отдельно — какая ошибка чаще всего ломает адаптив или читаемость.",
-        },
-      ],
-    },
-    {
       id: "flex-vs-grid",
       title: "Когда Flexbox, когда Grid",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Выбор инструмента зависит от задачи: Flexbox лучше для одной оси, Grid — для полноценной сетки из строк и колонок.",
+        },
+        {
+          type: "code",
+          content: `.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Комбинировать Grid и Flexbox нормально: Grid для зон, Flex для внутреннего выравнивания.",
+        },
         {
           type: "table",
           caption: "Что выбрать в реальной задаче",
@@ -131,6 +119,11 @@ const layoutPageData = {
   padding: 24px 16px;
 }`,
         },
+        {
+          type: "note",
+          content:
+            "⚠️ Не фиксируй высоту main-контента вручную: используй <code>1fr</code>, чтобы блок растягивался естественно.",
+        },
       ],
     },
     {
@@ -183,6 +176,11 @@ const layoutPageData = {
   gap: 16px;
 }`,
         },
+        {
+          type: "note",
+          content:
+            "💡 С <code>auto-fit + minmax</code> сетка адаптируется без большого количества media queries.",
+        },
       ],
     },
     {
@@ -210,12 +208,34 @@ const layoutPageData = {
 .sales { grid-area: sales; }
 .feed { grid-area: feed; }`,
         },
+        {
+          type: "note",
+          content:
+            "⚠️ Для мобильной версии лучше задать отдельный шаблон областей, иначе блоки могут стать нечитаемыми.",
+        },
       ],
     },
     {
       id: "alignment-recipes",
       title: "Готовые рецепты выравнивания",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Эти шаблоны помогают быстро решить частые задачи выравнивания без лишней ручной настройки.",
+        },
+        {
+          type: "code",
+          content: `.center {
+  display: grid;
+  place-items: center;
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Если видишь много однотипных margin-хаки, скорее всего задачу лучше решить через layout-контейнер.",
+        },
         {
           type: "table",
           caption: "Полезные layout-рецепты на каждый день",
@@ -246,6 +266,19 @@ const layoutPageData = {
       title: "Стратегия адаптивности",
       blocks: [
         {
+          type: "text",
+          content:
+            "Адаптивная стратегия начинается с мобильного сценария и расширяется только по фактическим точкам перелома интерфейса.",
+        },
+        {
+          type: "code",
+          content: `@media (max-width: 900px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+}`,
+        },
+        {
           type: "list",
           items: [
             "Сначала делай читаемо на мобильном, потом расширяй для больших экранов",
@@ -259,12 +292,32 @@ const layoutPageData = {
           content:
             "Адаптив — это не про «ужать всё», а про то, чтобы на любом экране было удобно читать и нажимать.",
         },
+        {
+          type: "responsive-playground",
+        },
       ],
     },
     {
       id: "layout-checklist",
       title: "Чеклист перед релизом",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Этот чеклист сокращает количество «сюрпризов» после релиза и помогает стабилизировать экран на всех устройствах.",
+        },
+        {
+          type: "code",
+          content: `.content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Всегда проверяй длинные строки и пустые данные: они ломают layout чаще всего.",
+        },
         {
           type: "list",
           items: [
@@ -281,6 +334,22 @@ const layoutPageData = {
       id: "layout-mistakes",
       title: "Частые ошибки",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Ошибки layout обычно проявляются не на идеальном мокапе, а на нестандартных данных и маленьких экранах.",
+        },
+        {
+          type: "code",
+          content: `.card-title {
+  overflow-wrap: anywhere;
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Включай проверку layout в definition of done, а не оставляй на финальный QA.",
+        },
         {
           type: "table",
           caption: "Типичные ошибки при построении layout",
@@ -314,6 +383,23 @@ const layoutPageData = {
       id: "layout-remember",
       title: "Что важно запомнить",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Если держать эти принципы в голове, layout становится предсказуемым и проще в поддержке.",
+        },
+        {
+          type: "code",
+          content: `.page {
+  display: grid;
+  gap: 16px;
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Сначала схема экрана, потом косметика. Иначе придется переделывать структуру позже.",
+        },
         {
           type: "list",
           items: [

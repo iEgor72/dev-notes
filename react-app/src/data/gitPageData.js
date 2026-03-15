@@ -5,7 +5,6 @@ const gitPageData = {
     "Git простыми словами: как безопасно сохранять изменения, работать в ветках и не бояться конфликтов.",
   toc: [
     { id: "what-is-git", label: "Что такое Git" },
-    { id: "git-format", label: "Как читать разделы" },
     { id: "init-clone", label: "git init и git clone" },
     { id: "status-add-commit", label: "status / add / commit" },
     { id: "log", label: "git log" },
@@ -43,39 +42,6 @@ const gitPageData = {
       ],
     },
     {
-      id: "git-format",
-      title: "Как читать разделы",
-      blocks: [
-        {
-          type: "subtitle",
-          content: "Простыми словами",
-        },
-        {
-          type: "text",
-          content:
-            "Сначала — что делает команда и зачем она нужна.",
-        },
-        {
-          type: "subtitle",
-          content: "Когда применять",
-        },
-        {
-          type: "text",
-          content:
-            "Дальше — в какой рабочей ситуации ты её используешь.",
-        },
-        {
-          type: "subtitle",
-          content: "Частая ошибка",
-        },
-        {
-          type: "text",
-          content:
-            "И сразу — какая ошибка встречается чаще всего и как её избежать.",
-        },
-      ],
-    },
-    {
       id: "init-clone",
       title: "git init и git clone",
       blocks: [
@@ -98,6 +64,11 @@ const gitPageData = {
             "git init — создаёт новый локальный репозиторий",
             "git clone — скачивает существующий удалённый репозиторий",
           ],
+        },
+        {
+          type: "note",
+          content:
+            "💡 Если проект уже есть на GitHub, почти всегда начинай с <code>git clone</code>, а не с <code>git init</code>.",
         },
       ],
     },
@@ -125,6 +96,11 @@ git commit -m "Добавил страницу React"`,
             ["<code>git add .</code>", "Добавляет изменения в staging area"],
             ["<code>git commit -m \"...\"</code>", "Создаёт коммит"],
           ],
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Старайся коммитить логические части задачи, а не весь рабочий каталог разом.",
         },
       ],
     },
@@ -172,6 +148,11 @@ git checkout -b feature/footer`,
             "git checkout branch-name — перейти в ветку",
             "git checkout -b new-branch — создать и сразу переключиться",
           ],
+        },
+        {
+          type: "note",
+          content:
+            "💡 Короткоживущие feature-ветки упрощают ревью и уменьшают риск конфликтов.",
         },
       ],
     },
@@ -265,6 +246,11 @@ git commit -m "Resolve merge conflict"`,
           content: `git remote -v
 git remote add origin https://github.com/user/project.git`,
         },
+        {
+          type: "note",
+          content:
+            "⚠️ Перед первым push проверь URL remote через <code>git remote -v</code>, чтобы не отправить код не туда.",
+        },
       ],
     },
     {
@@ -303,6 +289,11 @@ git push origin main`,
 git stash list
 git stash apply`,
         },
+        {
+          type: "note",
+          content:
+            "💡 Удобно сохранять stash с сообщением: <code>git stash push -m \"wip: auth form\"</code>.",
+        },
       ],
     },
     {
@@ -332,6 +323,23 @@ dist
       id: "git-mistakes",
       title: "Частые ошибки",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Ошибки в Git обычно происходят из-за спешки: коммиты без проверки, работа в main и пропуск синхронизации с remote.",
+        },
+        {
+          type: "code",
+          content: `# безопасная привычка перед push
+git status
+git log --oneline -5
+git pull --rebase`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Если не уверен в команде, сначала проверь её в отдельной ветке или на тестовом репозитории.",
+        },
         {
           type: "table",
           caption: "Типичные ошибки при работе с Git",
@@ -365,6 +373,22 @@ dist
       id: "git-remember",
       title: "Что важно запомнить",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Эти правила закрывают 80% повседневных задач и помогают безопасно работать в команде.",
+        },
+        {
+          type: "code",
+          content: `git status
+git add <files>
+git commit -m "feat: ..."` ,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Хорошая история коммитов ускоряет и код-ревью, и разбор инцидентов.",
+        },
         {
           type: "list",
           items: [

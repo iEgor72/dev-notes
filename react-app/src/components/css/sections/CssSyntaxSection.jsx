@@ -1,44 +1,64 @@
 import SectionCard from "../../ui/SectionCard";
 import CodeBlock from "../../ui/CodeBlock";
 import Note from "../../ui/Note";
+import TableWrap from "../../ui/TableWrap";
 
-function ConnectCssSection() {
+function CssSyntaxSection() {
   return (
     <SectionCard
-      id="connect-css"
-      title="Как подключить CSS"
-      titleId="connect-css-title"
+      id="css-syntax"
+      title="Синтаксис CSS"
+      titleId="css-syntax-title"
     >
-      <p>CSS можно подключить к HTML несколькими способами.</p>
-
-      <h3>Внешний файл</h3>
-
-      <CodeBlock>
-        {`<link rel="stylesheet" href="style.css" />`}
-      </CodeBlock>
-
-      <h3>Внутри тега style</h3>
+      <p>
+        Любое CSS-правило состоит из селектора и блока свойств. Так браузер
+        понимает, к какому элементу применить стиль и какое значение поставить.
+      </p>
 
       <CodeBlock>
-        {`<style>
-  body {
-    background: #111;
-    color: white;
-  }
-</style>`}
-      </CodeBlock>
-
-      <h3>Inline-стили</h3>
-
-      <CodeBlock>
-        {`<p style="color: red;">Текст</p>`}
+        {`.card {
+  color: #111827; /* свойство текста */
+  background-color: #f8fafc; /* цвет фона */
+  padding: 16px; /* внутренний отступ */
+}`}
       </CodeBlock>
 
       <Note>
-        Обычно лучше использовать внешний CSS-файл: так код чище и удобнее в поддержке.
+        ⚠️ Пропущенная точка с запятой или фигурная скобка ломает всё правило ниже
+        по файлу.
       </Note>
+
+      <TableWrap>
+        <table className="table">
+          <caption>Части CSS-правила</caption>
+          <thead>
+            <tr>
+              <th scope="col">Часть</th>
+              <th scope="col">Пример</th>
+              <th scope="col">Зачем нужна</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Селектор</td>
+              <td><code>.card</code></td>
+              <td>Выбирает элемент на странице</td>
+            </tr>
+            <tr>
+              <td>Свойство</td>
+              <td><code>padding</code></td>
+              <td>Определяет, что меняем</td>
+            </tr>
+            <tr>
+              <td>Значение</td>
+              <td><code>16px</code></td>
+              <td>Определяет итоговый вид</td>
+            </tr>
+          </tbody>
+        </table>
+      </TableWrap>
     </SectionCard>
   );
 }
 
-export default ConnectCssSection;
+export default CssSyntaxSection;

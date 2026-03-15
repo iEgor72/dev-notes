@@ -5,7 +5,6 @@ const tsPageData = {
     "TypeScript без боли: типы, интерфейсы, union, generics и как писать более надежный код простыми шагами.",
   toc: [
     { id: "what-is-ts", label: "Что такое TypeScript" },
-    { id: "ts-format", label: "Как читать разделы" },
     { id: "basic-types", label: "Базовые типы" },
     { id: "typing-variables", label: "Типизация переменных" },
     { id: "functions", label: "Функции" },
@@ -43,42 +42,25 @@ const tsPageData = {
       ],
     },
     {
-      id: "ts-format",
-      title: "Как читать разделы",
-      blocks: [
-        {
-          type: "subtitle",
-          content: "Простыми словами",
-        },
-        {
-          type: "text",
-          content:
-            "Сначала — короткое объяснение, что это такое и зачем нужно.",
-        },
-        {
-          type: "subtitle",
-          content: "Когда применять",
-        },
-        {
-          type: "text",
-          content:
-            "Дальше — пример, где этот инструмент реально помогает в проекте.",
-        },
-        {
-          type: "subtitle",
-          content: "Частая ошибка",
-        },
-        {
-          type: "text",
-          content:
-            "И напоследок — типичная ошибка с понятным способом её избежать.",
-        },
-      ],
-    },
-    {
       id: "basic-types",
       title: "Базовые типы",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Базовые типы помогают описать данные так, чтобы IDE и компилятор ловили ошибки до запуска приложения.",
+        },
+        {
+          type: "code",
+          content: `const title: string = "Шпаргалка";
+const views: number = 120;
+const isPublished: boolean = true;`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Избегай <code>any</code> в новой логике: он отключает пользу типизации.",
+        },
         {
           type: "table",
           caption: "Основные типы TypeScript",
@@ -146,6 +128,11 @@ let isAdmin: boolean = false;`,
       title: "Массивы и объекты",
       blocks: [
         {
+          type: "text",
+          content:
+            "Типизация коллекций и объектов делает автодополнение точнее и снижает риск ошибок при работе с полями.",
+        },
+        {
           type: "code",
           content: `const skills: string[] = ["HTML", "CSS", "TypeScript"];`,
         },
@@ -186,6 +173,11 @@ const admin: User = {
   isAdmin: true,
 };`,
         },
+        {
+          type: "note",
+          content:
+            "⚠️ Не дублируй одинаковые интерфейсы в разных файлах: выноси общие типы в отдельный модуль.",
+        },
       ],
     },
     {
@@ -210,6 +202,11 @@ let role: UserRole = "admin";`,
   price: number;
 };`,
         },
+        {
+          type: "note",
+          content:
+            "💡 Alias удобен для union и примитивов, а <code>interface</code> — для расширяемых объектных структур.",
+        },
       ],
     },
     {
@@ -233,6 +230,11 @@ id = "user-10";`,
           content: `function printId(id: string | number) {
   console.log(id);
 }`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Union почти всегда требует narrowing перед обращением к специфичным свойствам.",
         },
       ],
     },
@@ -279,6 +281,11 @@ function getInfo(account: Admin | User) {
       title: "Optional и readonly",
       blocks: [
         {
+          type: "text",
+          content:
+            "Optional-поля делают свойства необязательными, а readonly защищает критичные данные от случайного изменения.",
+        },
+        {
           type: "code",
           content: `interface User {
   name: string;
@@ -292,6 +299,11 @@ function getInfo(account: Admin | User) {
             "age? — необязательное свойство",
             "readonly id — нельзя изменить после создания",
           ],
+        },
+        {
+          type: "note",
+          content:
+            "💡 Для readonly-объектов часто удобно использовать иммутабельные обновления через spread.",
         },
       ],
     },
@@ -312,6 +324,11 @@ function getInfo(account: Admin | User) {
 
 const a = identity<string>("hello");
 const b = identity<number>(42);`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Не усложняй generic-подписи заранее: начинай с простого ограничения и расширяй при необходимости.",
         },
       ],
     },
@@ -347,6 +364,24 @@ function Button({ label, onClick }: ButtonProps) {
       title: "Частые ошибки",
       blocks: [
         {
+          type: "text",
+          content:
+            "Большинство ошибок TypeScript возникают, когда типизацию либо игнорируют, либо делают чрезмерно сложной.",
+        },
+        {
+          type: "code",
+          content: `// плохо
+const value: any = getData();
+
+// лучше
+const value: unknown = getData();`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Если типы читаются тяжело, это сигнал упростить модель данных или разбить ее на несколько частей.",
+        },
+        {
           type: "table",
           caption: "Типичные ошибки в TypeScript",
           columns: ["Ошибка", "Почему плохо", "Как лучше"],
@@ -379,6 +414,22 @@ function Button({ label, onClick }: ButtonProps) {
       id: "ts-remember",
       title: "Что важно запомнить",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Эти принципы помогают использовать TypeScript как инструмент надежности, а не как лишнюю бюрократию.",
+        },
+        {
+          type: "code",
+          content: `function toUpper(value: string) {
+  return value.toUpperCase();
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Лучшая стратегия: типизируй границы данных (API, props, стейт), затем внутреннюю логику.",
+        },
         {
           type: "list",
           items: [

@@ -10,14 +10,36 @@ import TsNarrowingPlayground from "../../playgrounds/TsNarrowingPlayground";
 import ReactUiPlayground from "../../playgrounds/ReactUiPlayground";
 import GitFlowPlayground from "../../playgrounds/GitFlowPlayground";
 import LayoutDecisionPlayground from "../../playgrounds/LayoutDecisionPlayground";
+import ResponsivePlayground from "../../playgrounds/ResponsivePlayground";
+import HtmlFormsPlayground from "../../playgrounds/HtmlFormsPlayground";
+import HtmlTablesPlayground from "../../playgrounds/HtmlTablesPlayground";
+import JsEventsPlayground from "../../playgrounds/JsEventsPlayground";
+
+function renderInlineCode(content) {
+  if (typeof content !== "string") {
+    return content;
+  }
+
+  const parts = content.split(/(<code>.*?<\/code>)/g);
+
+  return parts.map((part, index) => {
+    const match = part.match(/^<code>(.*?)<\/code>$/);
+
+    if (!match) {
+      return part;
+    }
+
+    return <code key={index}>{match[1]}</code>;
+  });
+}
 
 function renderBlock(block, index) {
   if (block.type === "text") {
-    return <p key={index}>{block.content}</p>;
+    return <p key={index}>{renderInlineCode(block.content)}</p>;
   }
 
   if (block.type === "note") {
-    return <Note key={index}>{block.content}</Note>;
+    return <Note key={index}>{renderInlineCode(block.content)}</Note>;
   }
 
   if (block.type === "code") {
@@ -28,7 +50,7 @@ function renderBlock(block, index) {
     return (
       <ul key={index}>
         {block.items.map((item, itemIndex) => (
-          <li key={itemIndex}>{item}</li>
+          <li key={itemIndex}>{renderInlineCode(item)}</li>
         ))}
       </ul>
     );
@@ -68,7 +90,7 @@ function renderBlock(block, index) {
   }
 
   if (block.type === "subtitle") {
-    return <h3 key={index}>{block.content}</h3>;
+    return <h3 key={index}>{renderInlineCode(block.content)}</h3>;
   }
 
   if (block.type === "playground") {
@@ -93,6 +115,22 @@ function renderBlock(block, index) {
 
   if (block.type === "layout-decision-playground") {
     return <LayoutDecisionPlayground key={index} />;
+  }
+
+  if (block.type === "responsive-playground") {
+    return <ResponsivePlayground key={index} />;
+  }
+
+  if (block.type === "html-forms-playground") {
+    return <HtmlFormsPlayground key={index} />;
+  }
+
+  if (block.type === "html-tables-playground") {
+    return <HtmlTablesPlayground key={index} />;
+  }
+
+  if (block.type === "js-events-playground") {
+    return <JsEventsPlayground key={index} />;
   }
 
   return null;

@@ -1,55 +1,84 @@
 import SectionCard from "../../ui/SectionCard";
 import CodeBlock from "../../ui/CodeBlock";
+import Note from "../../ui/Note";
 import TableWrap from "../../ui/TableWrap";
+import SelectorsPlayground from "../../../playgrounds/SelectorsPlayground";
 
-function CssSyntaxSection() {
+function SelectorsSection() {
   return (
     <SectionCard
-      id="css-syntax"
-      title="Синтаксис CSS"
-      titleId="css-syntax-title"
+      id="selectors"
+      title="Селекторы"
+      titleId="selectors-title"
     >
       <p>
-        CSS-правило обычно состоит из <strong>селектора</strong> и блока
-        свойств.
+        Селекторы определяют, к каким элементам применять стили. Чем точнее
+        селектор, тем проще контролировать каскад и избегать конфликтов.
       </p>
 
       <CodeBlock>
-        {`p {
-  color: white;
-  font-size: 18px;
+        {`.card {
+  border: 1px solid #d1d5db;
+}
+
+.card__title {
+  font-weight: 700;
+}
+
+.card:hover .card__title {
+  color: #2563eb;
+}
+
+input[type="email"] {
+  border-color: #0ea5e9;
 }`}
       </CodeBlock>
 
+      <Note>
+        ⚠️ Старайся не перегружать селекторы глубокой вложенностью, иначе
+        переопределять стили станет сложно.
+      </Note>
+
       <TableWrap>
         <table className="table">
-          <caption>Части CSS-правила</caption>
+          <caption>Частые типы селекторов</caption>
 
           <thead>
             <tr>
-              <th scope="col">Часть</th>
-              <th scope="col">Что делает</th>
+              <th scope="col">Тип</th>
+              <th scope="col">Пример</th>
+              <th scope="col">Когда использовать</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
-              <td><code>p</code></td>
-              <td>Селектор — указывает, к какому элементу применяются стили</td>
+              <td>Класс</td>
+              <td><code>.button</code></td>
+              <td>Основной способ стилизации UI-компонентов</td>
             </tr>
             <tr>
-              <td><code>color</code></td>
-              <td>Свойство — что именно меняем</td>
+              <td>Потомок</td>
+              <td><code>.card .title</code></td>
+              <td>Когда нужно стилизовать элемент внутри блока</td>
             </tr>
             <tr>
-              <td><code>white</code></td>
-              <td>Значение — каким будет результат</td>
+              <td>Псевдокласс</td>
+              <td><code>a:hover</code></td>
+              <td>Для интерактивных состояний</td>
+            </tr>
+            <tr>
+              <td>Атрибут</td>
+              <td><code>input[type="email"]</code></td>
+              <td>Для таргетинга по атрибуту без лишних классов</td>
             </tr>
           </tbody>
         </table>
       </TableWrap>
+
+      <SelectorsPlayground />
     </SectionCard>
   );
 }
 
-export default CssSyntaxSection;
+export default SelectorsSection;

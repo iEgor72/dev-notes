@@ -1,5 +1,6 @@
 import SectionCard from "../../ui/SectionCard";
 import CodeBlock from "../../ui/CodeBlock";
+import Note from "../../ui/Note";
 import TableWrap from "../../ui/TableWrap";
 import TextStylesPlayground from "../../../playgrounds/TextStylesPlayground";
 
@@ -10,6 +11,11 @@ function TextStylesSection() {
       title="Текст и шрифты"
       titleId="text-styles-title"
     >
+      <p>
+        Типографика влияет на читаемость интерфейса: размер, межстрочный
+        интервал и насыщенность должны работать вместе, а не по отдельности.
+      </p>
+
       <CodeBlock>
         {`body {
   font-family: Arial, sans-serif;
@@ -26,6 +32,13 @@ p {
   text-align: left;
 }`}
       </CodeBlock>
+
+      <p>
+        Для базового текста обычно достаточно 16px и <code>line-height</code>{" "}
+        около 1.5-1.7. Заголовки лучше проверять на длинных строках.
+      </p>
+
+      <Note>💡 Не выравнивай длинные абзацы по ширине: это ухудшает чтение.</Note>
 
       <TableWrap>
         <table className="table">
@@ -62,6 +75,8 @@ p {
           </tbody>
         </table>
       </TableWrap>
+
+      <p>Попробуй менять параметры текста и сравнивать читаемость вживую.</p>
 
       <TextStylesPlayground />
     </SectionCard>

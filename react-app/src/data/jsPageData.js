@@ -5,7 +5,6 @@ const jsPageData = {
     "JavaScript простым языком: переменные, функции, массивы, объекты, события и асинхронный код без лишней теории.",
   toc: [
     { id: "what-is-js", label: "Что такое JavaScript" },
-    { id: "js-format", label: "Как читать разделы" },
     { id: "variables", label: "Переменные" },
     { id: "data-types", label: "Типы данных" },
     { id: "conditions", label: "Условия" },
@@ -43,39 +42,6 @@ const jsPageData = {
       ],
     },
     {
-      id: "js-format",
-      title: "Как читать разделы",
-      blocks: [
-        {
-          type: "subtitle",
-          content: "Простыми словами",
-        },
-        {
-          type: "text",
-          content:
-            "Сначала даётся короткая суть темы без сложных терминов.",
-        },
-        {
-          type: "subtitle",
-          content: "Когда применять",
-        },
-        {
-          type: "text",
-          content:
-            "Потом показывается реальная ситуация, где это используется в коде.",
-        },
-        {
-          type: "subtitle",
-          content: "Частая ошибка",
-        },
-        {
-          type: "text",
-          content:
-            "В конце разбирается типичный промах, чтобы ты не наступал на те же грабли.",
-        },
-      ],
-    },
-    {
       id: "variables",
       title: "Переменные",
       blocks: [
@@ -106,6 +72,11 @@ currentSection = "React";`,
       title: "Типы данных",
       blocks: [
         {
+          type: "text",
+          content:
+            "Тип данных определяет, какие операции безопасно выполнять со значением и как оно ведет себя в вычислениях.",
+        },
+        {
           type: "table",
           caption: "Основные типы данных в JavaScript",
           columns: ["Тип", "Пример", "Описание"],
@@ -124,6 +95,11 @@ currentSection = "React";`,
           content: `const userName = "Alex";
 const age = 25;
 const isAdmin = false;`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Массивы в JS технически имеют тип <code>object</code>, поэтому проверяй их через <code>Array.isArray()</code>.",
         },
       ],
     },
@@ -161,12 +137,22 @@ switch (theme) {
     console.log("Тема не выбрана");
 }`,
         },
+        {
+          type: "note",
+          content:
+            "💡 Для простых проверок лучше использовать <code>if/else</code>, а <code>switch</code> оставлять для нескольких четких вариантов.",
+        },
       ],
     },
     {
       id: "loops",
       title: "Циклы",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Циклы нужны, когда одну и ту же операцию нужно выполнить для набора значений.",
+        },
         {
           type: "code",
           content: `for (let i = 0; i < 5; i++) {
@@ -212,6 +198,11 @@ console.log(greet("Alex"));`,
 };
 
 console.log(sum(2, 3));`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Чем меньше скрытых побочных эффектов в функции, тем легче ее тестировать и переиспользовать.",
         },
       ],
     },
@@ -301,6 +292,11 @@ console.log(doubled);`,
 
 console.log(user.name);`,
         },
+        {
+          type: "note",
+          content:
+            "💡 Для копирования объекта используй spread: <code>{'{ ...user }'}</code>, а не прямое присваивание по ссылке.",
+        },
       ],
     },
     {
@@ -341,6 +337,14 @@ title.textContent = "Новый заголовок";`,
 button.addEventListener("click", () => {
   console.log("Кнопка нажата");
 });`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Не забывай про всплытие событий и при необходимости используй <code>event.stopPropagation()</code>.",
+        },
+        {
+          type: "js-events-playground",
         },
       ],
     },
@@ -386,6 +390,28 @@ loadUsers();`,
       title: "Частые ошибки",
       blocks: [
         {
+          type: "text",
+          content:
+            "Типичные JS-ошибки связаны с неявным поведением языка и отсутствием обработки краевых случаев.",
+        },
+        {
+          type: "code",
+          content: `// плохо
+if (value == 0) {
+  // ...
+}
+
+// лучше
+if (value === 0) {
+  // ...
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Жестко придерживайся <code>===</code> и ранней обработки ошибок, особенно в async-коде.",
+        },
+        {
           type: "table",
           caption: "Типичные ошибки в JavaScript",
           columns: ["Ошибка", "Почему плохо", "Как лучше"],
@@ -418,6 +444,21 @@ loadUsers();`,
       id: "js-remember",
       title: "Что важно запомнить",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Эти принципы помогают писать предсказуемый JS-код и быстрее находить ошибки.",
+        },
+        {
+          type: "code",
+          content: `const isReady = status === "ready";
+if (!isReady) return;`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Понятный код важнее «умных» сокращений: через месяц ты сам себе скажешь спасибо.",
+        },
         {
           type: "list",
           items: [

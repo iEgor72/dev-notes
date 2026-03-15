@@ -1,5 +1,6 @@
 import SectionCard from "../../ui/SectionCard";
 import CodeBlock from "../../ui/CodeBlock";
+import Note from "../../ui/Note";
 import TableWrap from "../../ui/TableWrap";
 import DisplayPlayground from "../../../playgrounds/DisplayPlayground";
 
@@ -67,6 +68,11 @@ function DisplaySection() {
           </tbody>
         </table>
       </TableWrap>
+
+      <Note>
+        ⚠️ <code>display: none</code> скрывает элемент полностью, включая
+        доступность для скринридера.
+      </Note>
 
       <DisplayPlayground />
     </SectionCard>

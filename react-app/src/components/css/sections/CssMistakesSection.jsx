@@ -1,4 +1,6 @@
 import SectionCard from "../../ui/SectionCard";
+import CodeBlock from "../../ui/CodeBlock";
+import Note from "../../ui/Note";
 import TableWrap from "../../ui/TableWrap";
 
 function CssMistakesSection() {
@@ -8,6 +10,26 @@ function CssMistakesSection() {
       title="Частые ошибки"
       titleId="css-mistakes-title"
     >
+      <p>
+        Большинство проблем в CSS появляется не из-за "сложных свойств", а из-за
+        хаотичной структуры селекторов и отступов.
+      </p>
+
+      <CodeBlock>
+        {`.layout {
+  display: grid;
+  gap: 16px; /* лучше, чем каскад margin у детей */
+}
+
+.button {
+  padding: 8px 12px;
+}
+
+/* избегай !important, если можно поднять специфичность структурой */`}
+      </CodeBlock>
+
+      <Note>💡 Сначала упрощай структуру, и только потом "лечи" отдельный баг.</Note>
+
       <TableWrap>
         <table className="table">
           <caption>Типичные ошибки при работе с CSS</caption>

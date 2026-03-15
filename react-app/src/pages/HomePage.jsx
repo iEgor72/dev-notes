@@ -53,42 +53,6 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="card card--solid home-path" aria-labelledby="home-path-title">
-        <div className="home-section-head">
-          <div>
-            <span className="badge">Формат</span>
-            <h2 className="section-title" id="home-path-title">
-              Как устроен каждый раздел
-            </h2>
-          </div>
-        </div>
-
-        <div className="home-path__grid">
-          <article className="home-path-card">
-            <p className="home-path-card__step">Шаг 1</p>
-            <h3 className="home-path-card__title">Простыми словами</h3>
-            <p className="home-path-card__text">
-              Сначала коротко объясняем суть темы без перегруза терминами.
-            </p>
-          </article>
-
-          <article className="home-path-card">
-            <p className="home-path-card__step">Шаг 2</p>
-            <h3 className="home-path-card__title">Когда применять</h3>
-            <p className="home-path-card__text">
-              Потом показываем реальную задачу, где это пригодится в работе.
-            </p>
-          </article>
-
-          <article className="home-path-card">
-            <p className="home-path-card__step">Шаг 3</p>
-            <h3 className="home-path-card__title">Частая ошибка</h3>
-            <p className="home-path-card__text">
-              В конце разбираем, где обычно ошибаются и как сделать правильно.
-            </p>
-          </article>
-        </div>
-      </section>
     </div>
   );
 }

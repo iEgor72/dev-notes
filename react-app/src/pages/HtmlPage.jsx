@@ -1,13 +1,8 @@
-import HtmlHero from "../components/html/HtmlHero";
-import HtmlContent from "../components/html/HtmlContent";
+import DocsPageRenderer from "../components/docs/DocsPageRenderer";
+import htmlPageData from "../data/htmlPageData";
 
 function HtmlPage() {
-  return (
-    <div className="page-stack">
-      <HtmlHero />
-      <HtmlContent />
-    </div>
-  );
+  return <DocsPageRenderer page={htmlPageData} />;
 }
 
 export default HtmlPage;

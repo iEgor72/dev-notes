@@ -1,5 +1,6 @@
 import SectionCard from "../../ui/SectionCard";
 import CodeBlock from "../../ui/CodeBlock";
+import Note from "../../ui/Note";
 import PositionPlayground from "../../../playgrounds/PositionPlayground";
 
 function PositionSection() {
@@ -37,6 +38,11 @@ function PositionSection() {
         <li><code>fixed</code> — привязка к окну браузера</li>
         <li><code>sticky</code> — прилипание при скролле</li>
       </ul>
+
+      <Note>
+        ⚠️ Для <code>absolute</code> заранее ставь <code>position: relative</code>{" "}
+        родителю, иначе элемент может "уехать" к <code>body</code>.
+      </Note>
 
       <PositionPlayground />
     </SectionCard>

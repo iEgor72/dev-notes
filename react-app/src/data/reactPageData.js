@@ -5,7 +5,6 @@ const reactPageData = {
     "React простым языком: как собирать интерфейс из компонентов, управлять состоянием и не запутаться в логике.",
   toc: [
     { id: "what-is-react", label: "Что такое React" },
-    { id: "react-format", label: "Как читать разделы" },
     { id: "jsx", label: "JSX" },
     { id: "components", label: "Компоненты" },
     { id: "props", label: "Props" },
@@ -44,39 +43,6 @@ const reactPageData = {
       ],
     },
     {
-      id: "react-format",
-      title: "Как читать разделы",
-      blocks: [
-        {
-          type: "subtitle",
-          content: "Простыми словами",
-        },
-        {
-          type: "text",
-          content:
-            "Сначала — короткая идея темы, без лишней теории.",
-        },
-        {
-          type: "subtitle",
-          content: "Когда применять",
-        },
-        {
-          type: "text",
-          content:
-            "Потом — практический пример в интерфейсе или компоненте.",
-        },
-        {
-          type: "subtitle",
-          content: "Частая ошибка",
-        },
-        {
-          type: "text",
-          content:
-            "В конце — типичный анти-паттерн и как сделать правильно.",
-        },
-      ],
-    },
-    {
       id: "jsx",
       title: "JSX",
       blocks: [
@@ -103,6 +69,11 @@ const reactPageData = {
             "атрибуты пишутся в camelCase, например onClick",
             "внутри JSX JavaScript вставляется через { }",
           ],
+        },
+        {
+          type: "note",
+          content:
+            "💡 JSX-подход помогает держать разметку и логику рядом, но вычисления лучше выносить из return-блока.",
         },
       ],
     },
@@ -148,6 +119,11 @@ export default Welcome;`,
 function App() {
   return <Button label="Сохранить" />;
 }`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Props нельзя менять внутри дочернего компонента: они приходят только для чтения.",
         },
       ],
     },
@@ -203,6 +179,11 @@ function Counter() {
   return <button onClick={handleClick}>Нажми</button>;
 }`,
         },
+        {
+          type: "note",
+          content:
+            "💡 Передавай в обработчики функции, а не результат вызова: <code>onClick={handler}</code>, не <code>onClick={handler()}</code>.",
+        },
       ],
     },
     {
@@ -234,6 +215,11 @@ function SearchForm() {
   );
 }`,
         },
+        {
+          type: "note",
+          content:
+            "⚠️ Controlled-компоненты проще валидировать и синхронизировать с UI-состоянием.",
+        },
       ],
     },
     {
@@ -254,6 +240,11 @@ function SearchForm() {
     </div>
   );
 }`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Для сложных условий используй ранний <code>return</code>, чтобы не перегружать JSX тернарниками.",
         },
       ],
     },
@@ -308,6 +299,11 @@ function App() {
   return <div>Контент</div>;
 }`,
         },
+        {
+          type: "note",
+          content:
+            "⚠️ Следи за массивом зависимостей: пропущенные зависимости дают устаревшие значения и баги.",
+        },
       ],
     },
     {
@@ -328,6 +324,20 @@ function App() {
             "useCallback — мемоизация функций",
             "useRef — ссылка на DOM или сохранение значения",
           ],
+        },
+        {
+          type: "code",
+          content: `function Counter() {
+  const [count, setCount] = useState(0);
+  const doubled = useMemo(() => count * 2, [count]);
+
+  return <button onClick={() => setCount((v) => v + 1)}>{doubled}</button>;
+}`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Hooks вызываются только на верхнем уровне компонента, не внутри условий и циклов.",
         },
       ],
     },
@@ -378,12 +388,35 @@ function App() {
   );
 }`,
         },
+        {
+          type: "note",
+          content:
+            "💡 Для переходов внутри SPA используй <code>Link</code>, а не обычный <code>a</code>, чтобы не перезагружать страницу.",
+        },
       ],
     },
     {
       id: "react-mistakes",
       title: "Частые ошибки",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Ошибки в React чаще всего связаны с управлением состоянием и чрезмерной сложностью компонентов.",
+        },
+        {
+          type: "code",
+          content: `// плохо
+state.items.push(newItem);
+
+// лучше
+setItems((prev) => [...prev, newItem]);`,
+        },
+        {
+          type: "note",
+          content:
+            "⚠️ Избегай мутаций: React ожидает новые ссылки для корректного рендера.",
+        },
         {
           type: "table",
           caption: "Типичные ошибки в React",
@@ -417,6 +450,20 @@ function App() {
       id: "react-remember",
       title: "Что важно запомнить",
       blocks: [
+        {
+          type: "text",
+          content:
+            "Эти ориентиры помогают держать React-код чистым и масштабируемым по мере роста проекта.",
+        },
+        {
+          type: "code",
+          content: `const next = useMemo(() => items.filter(Boolean), [items]);`,
+        },
+        {
+          type: "note",
+          content:
+            "💡 Если компонент сложно объяснить в двух фразах, возможно, его пора разбить на части.",
+        },
         {
           type: "list",
           items: [
